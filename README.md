@@ -20,3 +20,5 @@
 本家のルールの詳細は、以下を参照してください。<br>
 https://ci.nii.ac.jp/naid/110006381118/
 
+## License
+MIT
