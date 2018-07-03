@@ -55,16 +55,16 @@ public class SimulationView extends JFrame implements Observer {
 		getContentPane().revalidate();
 		getContentPane().repaint();
 		p.setLayout(layout);
+		
+		if ((info.getRoundNum() == 5)||((info.getRoundNum() == 1) && (info.getTurnNum() == 1))){
+			setTitle("最中限 -シミュレーション-");
+			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			setSize(1280, 720);
+			setLocationRelativeTo(null);
+			setVisible(true);
+		}
 
 		if (info.getRoundNum() < 4) {
-
-			if ((info.getRoundNum() == 1) && (info.getTurnNum() == 1)) {
-				setTitle("最中限 -シミュレーション-");
-				setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				setSize(1280, 720);
-				setLocationRelativeTo(null);
-				setVisible(true);
-			}
 
 			labelTop.setText("ラウンド: " + info.getRoundNum() + " , ターン: " + info.getTurnNum());
 			labelTop.setFont(new Font("MS　ゴシック", Font.BOLD, 60));
@@ -202,7 +202,7 @@ public class SimulationView extends JFrame implements Observer {
 
 			getContentPane().add(p, BorderLayout.CENTER);
 
-		} else {
+		} else if (info.getRoundNum() == 4) {
 			if(Objects.nonNull(arg)){
 				setVisible(false);
 				dispose();
@@ -289,6 +289,48 @@ public class SimulationView extends JFrame implements Observer {
 			p.add(button1);
 
 			getContentPane().add(p, BorderLayout.CENTER);
+		}else {
+			if(Objects.nonNull(arg)){
+				setVisible(false);
+				dispose();
+			}
+			labelTop.setText("値が不正です");
+			labelTop.setFont(new Font("MS　ゴシック", Font.BOLD, 60));
+			labelTop.setForeground(Color.BLACK);
+			labelTop.setBackground(Color.YELLOW);
+			labelTop.setHorizontalAlignment(JLabel.CENTER);
+			labelTop.setOpaque(true);
+			gbc.gridx = 0;
+			gbc.gridy = 0;
+			gbc.gridwidth = 4;
+			gbc.gridheight = 1;
+			gbc.weightx = 1.0;
+			gbc.weighty = 1.0;
+			gbc.anchor = GridBagConstraints.CENTER;
+			gbc.fill = GridBagConstraints.BOTH;
+			layout.setConstraints(labelTop, gbc);
+
+			button1.setText("メニューに戻る");
+			button1.setPreferredSize(new Dimension(300, 100));
+			button1.setFont(new Font("MS　ゴシック", Font.PLAIN, 35));
+			button1.setMargin(new Insets(10, 10, 10, 10));
+			button1.setActionCommand("GoBack");
+			gbc.gridx = 1;
+			gbc.gridy = 4;
+			gbc.gridwidth = 2;
+			gbc.gridheight = 1;
+			gbc.weightx = 1.0;
+			gbc.weighty = 1.0;
+			gbc.anchor = GridBagConstraints.CENTER;
+			gbc.fill = GridBagConstraints.NONE;
+			layout.setConstraints(button1, gbc);
+
+			p.add(labelTop);
+			p.add(labelCenter);
+			p.add(button1);
+
+			getContentPane().add(p, BorderLayout.CENTER);
+
 		}
 	}
 

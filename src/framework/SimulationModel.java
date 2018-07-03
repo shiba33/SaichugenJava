@@ -59,7 +59,7 @@ public class SimulationModel extends Observable {
 		this.player2 = player2;
 		this.player3 = player3;
 	}
-	
+
 	/**
 	 * ボタン1が押したイベントの処理を記したメソッドです。
 	 */
@@ -99,39 +99,47 @@ public class SimulationModel extends Observable {
 						p2Hand = player2.strategy(tableCards.getDeepHands(1), score, 1, info);
 						p3Hand = player3.strategy(tableCards.getDeepHands(2), score, 2, info);
 
-						// プレイヤーの使用したカードの削除をする。
-						tableCards.removeAndRecordCards(tableCards.getDeepHands(0), 0, p1Hand);
-						tableCards.removeAndRecordCards(tableCards.getDeepHands(1), 1, p2Hand);
-						tableCards.removeAndRecordCards(tableCards.getDeepHands(2), 2, p3Hand);
+						if(!tableCards.getDeepHands(0).contains(p1Hand)||
+								!tableCards.getDeepHands(1).contains(p2Hand)||
+								!tableCards.getDeepHands(2).contains(p3Hand)) {
+							info.setRoundNum(5);
+							publish();
+							return null;
+						}else {
 
-						// ターンの勝敗判定をする。
-						judge.turnJudgement(p1Hand, p2Hand, p3Hand);
-						score.setTurnScore(judge.geTurntWinner(), judge.getPoint());
+							// プレイヤーの使用したカードの削除をする。
+							tableCards.removeAndRecordCards(tableCards.getDeepHands(0), 0, p1Hand);
+							tableCards.removeAndRecordCards(tableCards.getDeepHands(1), 1, p2Hand);
+							tableCards.removeAndRecordCards(tableCards.getDeepHands(2), 2, p3Hand);
 
-						// ターンの得点順位を設定する。
-						judge.turnRanking(score);
-						score.setTurnRanking(judge.getTurnRanking());
+							// ターンの勝敗判定をする。
+							judge.turnJudgement(p1Hand, p2Hand, p3Hand);
+							score.setTurnScore(judge.geTurntWinner(), judge.getPoint());
 
-						// フレームへ描画の設定をする
-						playerName[0] = player1.getName();
-						playerName[1] = player2.getName();
-						playerName[2] = player3.getName();
+							// ターンの得点順位を設定する。
+							judge.turnRanking(score);
+							score.setTurnRanking(judge.getTurnRanking());
 
-						putOutArray[0] = p1Hand;
-						putOutArray[1] = p2Hand;
-						putOutArray[2] = p3Hand;
+							// フレームへ描画の設定をする
+							playerName[0] = cutPlayerName(player1.getName());
+							playerName[1] = cutPlayerName(player2.getName());
+							playerName[2] = cutPlayerName(player3.getName());
 
-						publish();
+							putOutArray[0] = p1Hand;
+							putOutArray[1] = p2Hand;
+							putOutArray[2] = p3Hand;
+							publish();
 
-						try {
-							Thread.sleep(500);
-						} catch (InterruptedException e) {
+							try {
+								Thread.sleep(500);
+							} catch (InterruptedException e) {
+							}
 						}
 
 					}
 					judge.roundJudgement(score);
 					score.setRoundScore(judge.getRoundWinner());
-					
+
 					judge.roundRanking(score);
 					score.setRoundRanking(judge.getRoundRanking());
 
@@ -169,6 +177,14 @@ public class SimulationModel extends Observable {
 	 */
 	protected String[] getAllPlayerName() {
 		return playerName;
+	}
+	/**
+	 * アスキーコードで記された文字列から一定の文字数をカットするメソッドです。
+	 * @param s 編集元の文字列
+	 * @return 編集後の文字列
+	 */
+	protected String cutPlayerName(String s) {
+		return s;
 	}
 	/**
 	 * ターンで使用したカードの配列を取得するメソッドです。
