@@ -23,7 +23,6 @@ import javax.swing.JPanel;
  * @author 柴田航平
  */
 public class SimulationView extends JFrame implements Observer {
-
 	private GridBagLayout layout = new GridBagLayout();
 	private GridBagConstraints gbc = new GridBagConstraints();
 	private JPanel p = new JPanel();
@@ -60,7 +59,7 @@ public class SimulationView extends JFrame implements Observer {
 		if (info.getRoundNum() < 4) {
 
 			if ((info.getRoundNum() == 1) && (info.getTurnNum() == 1)) {
-				setTitle("最中限 -シュミュレーション-");
+				setTitle("最中限 -シミュレーション-");
 				setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				setSize(1280, 720);
 				setLocationRelativeTo(null);

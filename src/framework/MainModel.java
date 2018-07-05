@@ -1,6 +1,9 @@
 package framework;
 
+import java.awt.event.ActionListener;
 import java.util.Observable;
+
+import javax.swing.SwingUtilities;
 
 /**
  * メニューのModelを表すクラスです。
@@ -32,7 +35,6 @@ public class MainModel extends Observable{
 		button2 = 0;
 		button3 = 0;
 	}
-	
 	/**
 	 * ボタン1の状態を変化させるメソッドです。
 	 */
