@@ -7,6 +7,12 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.ImageIcon;
 
+/**
+ * 画像を指定したサイズに変換するクラスです。
+ *
+ * @author 古田亮汰郎
+ *
+ */
 public class ResizingImage {
 	public static ImageIcon resizeIcon(ImageIcon icon, int x, int y) {
 		Image Gresize = icon.getImage();
