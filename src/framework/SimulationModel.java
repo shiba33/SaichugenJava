@@ -98,7 +98,8 @@ public class SimulationModel extends Observable {
 						p1Hand = player1.strategy(tableCards.getDeepHands(0), score, 0, info);
 						p2Hand = player2.strategy(tableCards.getDeepHands(1), score, 1, info);
 						p3Hand = player3.strategy(tableCards.getDeepHands(2), score, 2, info);
-            // プレイヤーの使用したカードが手札にあるか判定する。なければ異常終了
+						
+						// プレイヤーの使用したカードが手札にあるか判定する。なければ異常終了
 						if(!tableCards.getDeepHands(0).contains(p1Hand)||
 								!tableCards.getDeepHands(1).contains(p2Hand)||
 								!tableCards.getDeepHands(2).contains(p3Hand)) {

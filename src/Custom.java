@@ -1,25 +1,26 @@
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-import framework.ValueUtility;
 import framework.InfoGame;
 import framework.Player;
 import framework.Score;
 
 /**
- * 無駄に長く意味不明なプレイヤー名を指定するクラスです。
- * 手札からランダムなカードを出します。
+ * 端末で手札指定してね？
  * 
  * @author 柴田航平 & 鈴木大河
  * @see Player
  * @return カードの識別番号(0-51)
  */
-public class Random2 extends Player {
+public class Custom extends Player {
 	/**
 	 * プレイヤー名を指定するコンストラクタです。
 	 */
-	public Random2() {
-		super("わいRadeon's2018記念");
+	public Custom() {
+		super("Custom");
 	}
 
 	/**
@@ -30,6 +31,15 @@ public class Random2 extends Player {
 	 */
 	@Override
 	public int strategy(ArrayList<Integer> hands, Score score, int id, InfoGame info) {
-		return ValueUtility.randomValue(hands);
+		String str=null;
+		System.out.println("てふだ:"+hands);
+		try{
+			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+			System.out.print("num[0-51]:");
+			str = br.readLine();
+		}catch(IOException e){
+			System.out.println("Exception :" + e);
+		}
+		return Integer.valueOf(str) ;
 	}
 }
