@@ -20,7 +20,7 @@ import javax.swing.JPanel;
 
 /**
  * シュミュレーションのView(描画)に関わるクラスです。
- * @author 柴田航平
+ * @author 柴田航平 & 鈴木大河
  */
 public class SimulationView extends JFrame implements Observer {
 	private GridBagLayout layout = new GridBagLayout();

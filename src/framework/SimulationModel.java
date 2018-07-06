@@ -98,7 +98,7 @@ public class SimulationModel extends Observable {
 						p1Hand = player1.strategy(tableCards.getDeepHands(0), score, 0, info);
 						p2Hand = player2.strategy(tableCards.getDeepHands(1), score, 1, info);
 						p3Hand = player3.strategy(tableCards.getDeepHands(2), score, 2, info);
-
+            // プレイヤーの使用したカードが手札にあるか判定する。なければ異常終了
 						if(!tableCards.getDeepHands(0).contains(p1Hand)||
 								!tableCards.getDeepHands(1).contains(p2Hand)||
 								!tableCards.getDeepHands(2).contains(p3Hand)) {
@@ -179,21 +179,12 @@ public class SimulationModel extends Observable {
 		return playerName;
 	}
 	/**
-	 * アスキーコードで記された文字列から一定の文字数をカットするメソッドです。
+	 * 文字列を一定の長さ(10byte)にカットするメソッドです。
 	 * @param s 編集元の文字列
 	 * @return 編集後の文字列
 	 */
 	protected String cutPlayerName(String s) {
-		int b = 0;
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < s.length(); i++) {
-            String s1 = s.substring(i, i + 1);
-            b += s1.getBytes().length;
-            if (b > 10) {
-                break;
-            }else sb.append(s1);
-        }
-		return sb.toString();
+		return StringTools.cutString(s,10);
 	}
 	/**
 	 * ターンで使用したカードの配列を取得するメソッドです。
