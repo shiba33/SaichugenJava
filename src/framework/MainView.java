@@ -14,7 +14,6 @@ import java.util.Objects;
 import java.util.Observable;
 import java.util.Observer;
 
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -25,14 +24,12 @@ import javax.swing.JPanel;
 /**
  * メニューのViewに関わるクラスです。
  *
- * @author 柴田航平
+ * @author 柴田航平 * 古田亮汰郎
  * @see Observer
  */
 public class MainView extends JFrame implements Observer {
 
 	private JPanel panel = new JPanel();
-	private JPanel panel2 = new JPanel();
-	private JPanel panel3 = new JPanel();
 	private JLabel label2 = new JLabel();
 	private JLabel label3 = new JLabel();
 	private JLabel label4 = new JLabel();
@@ -40,10 +37,8 @@ public class MainView extends JFrame implements Observer {
 	private Dimension size;
 	private JButton button1, button2, button3, button4;
 	public JComboBox combo1, combo2, combo3;
-	int width;
-	int height;
-	int x;
-	int y;
+	int screen_size_x;
+	int screen_size_y;
 	private Player p1, p2, p3;
 
 	public MainView(Player player1, Player player2, Player player3) {
@@ -63,51 +58,61 @@ public class MainView extends JFrame implements Observer {
 			@Override
 			public void componentResized(ComponentEvent e) {
 				size = getSize();
-				x = (int) size.getWidth();
-				y = (int) size.getHeight();
-				setTitle("最中限" + "(" + x + "×" + y + ")");
+				screen_size_x = (int) size.getWidth();
+				screen_size_y = (int) size.getHeight();
+				setTitle("最中限" + "(" + screen_size_x + "×" + screen_size_y + ")");
 				ImageIcon start1 = new ImageIcon("./image/start1.png");
-				ImageIcon resizestart = PictureBuilder.resizeIcon(start1, x / 3, y / 14);
+				ImageIcon resizing_start = ResizingImage.resizeIcon(start1, screen_size_x / 3, screen_size_y / 14);
 				ImageIcon start2 = new ImageIcon("./image/start2.png");
-				ImageIcon resizestart2 = PictureBuilder.resizeIcon(start2, x / 3, y / 14);
+				ImageIcon resizing_start2 = ResizingImage.resizeIcon(start2, screen_size_x / 3, screen_size_y / 14);
 				ImageIcon sim1 = new ImageIcon("./image/simulation1.png");
-				ImageIcon resim1 = PictureBuilder.resizeIcon(sim1, x / 3, y / 14);
+				ImageIcon resizing_sim1 = ResizingImage.resizeIcon(sim1, screen_size_x / 3, screen_size_y / 14);
 				ImageIcon sim2 = new ImageIcon("./image/simulation2.png");
-				ImageIcon resim2 = PictureBuilder.resizeIcon(sim2, x / 3, y / 14);
+				ImageIcon resizing_sim2 = ResizingImage.resizeIcon(sim2, screen_size_x / 3, screen_size_y / 14);
 				ImageIcon rule1 = new ImageIcon("./image/rule1.png");
-				ImageIcon rerule1 = PictureBuilder.resizeIcon(rule1, x / 3, y / 14);
+				ImageIcon resizing_rule1 = ResizingImage.resizeIcon(rule1, screen_size_x / 3, screen_size_y / 14);
 				ImageIcon rule2 = new ImageIcon("./image/rule2.png");
-				ImageIcon rerule2 = PictureBuilder.resizeIcon(rule2, x / 3, y / 14);
+				ImageIcon resizing_rule2 = ResizingImage.resizeIcon(rule2, screen_size_x / 3, screen_size_y / 14);
 				ImageIcon exit1 = new ImageIcon("./image/exit1.png");
-				ImageIcon reexit1 = PictureBuilder.resizeIcon(exit1, x / 3, y / 14);
+				ImageIcon resizing_exit1 = ResizingImage.resizeIcon(exit1, screen_size_x / 3, screen_size_y / 14);
 				ImageIcon exit2 = new ImageIcon("./image/exit2.png");
-				ImageIcon reexit2 = PictureBuilder.resizeIcon(exit2, x / 3, y / 14);
-				button1.setIcon(resizestart);
-				button1.setRolloverIcon(resizestart2);
-				button2.setIcon(resim1);
-				button2.setRolloverIcon(resim2);
-				button3.setIcon(rerule1);
-				button3.setRolloverIcon(rerule2);
-				button4.setIcon(reexit1);
-				button4.setRolloverIcon(reexit2);
-				//label1.setBounds(x / 2 - 360, 0, 999, 345);
-				button1.setBounds(x / 2 - (x / 3 / 2), y / 3 + y / 14, x / 3, y / 14);
-				button2.setBounds(x / 2 - (x / 3 / 2), y / 3 + y / 14 + y / 14 + 15, x / 3, y / 14);
-				button3.setBounds(x / 2 - (x / 3 / 2), y / 3 + y / 14 + y / 14 + y / 14 + 30, x / 3, y / 14);
-				button4.setBounds(x / 2 - (x / 3 / 2), y / 3 + y / 14 + y / 14 + y / 14 + y / 14 + 45, x / 3, y / 14);
-				label2.setBounds(x - 445, y - (100 + (x / 128) + (y / 72)), 120, 35);
-				label2.setFont(new Font("MS　ゴシック", Font.BOLD, x / 128 + y / 72));
-				label3.setBounds(x - 295, y - (100 + (x / 128) + (y / 72)), 120, 35);
-				label3.setFont(new Font("MS　ゴシック", Font.BOLD, x / 128 + y / 72));
-				label4.setBounds(x - 145, y - (100 + (x / 128) + (y / 72)), 120, 35);
-				label4.setFont(new Font("MS　ゴシック", Font.BOLD, x / 128 + y / 72));
-				combo1.setBounds(x - 450, y - 80, 120, 20);
-				combo2.setBounds(x - 300, y - 80, 120, 20);
-				combo3.setBounds(x - 150, y - 80, 120, 20);
-				ImageIcon back = new ImageIcon("./image/background.png");
-				ImageIcon reback = PictureBuilder.resizeIcon(back, x, y);
-				background.setIcon(reback);
-				background.setBounds(0, 0, x, y);
+				ImageIcon resizing_exit2 = ResizingImage.resizeIcon(exit2, screen_size_x / 3, screen_size_y / 14);
+				button1.setIcon(resizing_start);
+				button1.setRolloverIcon(resizing_start2);
+				button2.setIcon(resizing_sim1);
+				button2.setRolloverIcon(resizing_sim2);
+				button3.setIcon(resizing_rule1);
+				button3.setRolloverIcon(resizing_rule2);
+				button4.setIcon(resizing_exit1);
+				button4.setRolloverIcon(resizing_exit2);
+				button1.setBounds(screen_size_x / 2 - (screen_size_x / 3 / 2), screen_size_y / 3 + screen_size_y / 14,
+						screen_size_x / 3, screen_size_y / 14);
+				button2.setBounds(screen_size_x / 2 - (screen_size_x / 3 / 2),
+						screen_size_y / 3 + screen_size_y / 14 + screen_size_y / 14 + 15, screen_size_x / 3,
+						screen_size_y / 14);
+				button3.setBounds(screen_size_x / 2 - (screen_size_x / 3 / 2),
+						screen_size_y / 3 + screen_size_y / 14 + screen_size_y / 14 + screen_size_y / 14 + 30,
+						screen_size_x / 3, screen_size_y / 14);
+				button4.setBounds(
+						screen_size_x / 2 - (screen_size_x / 3 / 2), screen_size_y / 3 + screen_size_y / 14
+								+ screen_size_y / 14 + screen_size_y / 14 + screen_size_y / 14 + 45,
+						screen_size_x / 3, screen_size_y / 14);
+				label2.setBounds(screen_size_x - 445,
+						screen_size_y - (100 + (screen_size_x / 128) + (screen_size_y / 72)), 120, 35);
+				label2.setFont(new Font("MS　ゴシック", Font.BOLD, screen_size_x / 128 + screen_size_y / 72));
+				label3.setBounds(screen_size_x - 295,
+						screen_size_y - (100 + (screen_size_x / 128) + (screen_size_y / 72)), 120, 35);
+				label3.setFont(new Font("MS　ゴシック", Font.BOLD, screen_size_x / 128 + screen_size_y / 72));
+				label4.setBounds(screen_size_x - 145,
+						screen_size_y - (100 + (screen_size_x / 128) + (screen_size_y / 72)), 120, 35);
+				label4.setFont(new Font("MS　ゴシック", Font.BOLD, screen_size_x / 128 + screen_size_y / 72));
+				combo1.setBounds(screen_size_x - 450, screen_size_y - 80, 120, 20);
+				combo2.setBounds(screen_size_x - 300, screen_size_y - 80, 120, 20);
+				combo3.setBounds(screen_size_x - 150, screen_size_y - 80, 120, 20);
+				ImageIcon backImg = new ImageIcon("./image/background.png");
+				ImageIcon resizing_back = ResizingImage.resizeIcon(backImg, screen_size_x, screen_size_y);
+				background.setIcon(resizing_back);
+				background.setBounds(0, 0, screen_size_x, screen_size_y);
 
 			}
 		});
@@ -118,12 +123,10 @@ public class MainView extends JFrame implements Observer {
 		setSize(desktopBounds.width, desktopBounds.height);
 		setLocationRelativeTo(null);
 		size = getSize();
-		x = (int) size.getWidth();
-		y = (int) size.getHeight();
+		screen_size_x = (int) size.getWidth();
+		screen_size_y = (int) size.getHeight();
 
 		panel.setLayout(null);
-		panel3.setLayout(null);
-		panel2.setLayout(new BoxLayout(panel2, BoxLayout.X_AXIS));
 
 		button1 = new JButton(new ImageIcon("./image/start1.png"));
 		button1.setRolloverIcon(new ImageIcon("./image/start2.png"));
@@ -210,13 +213,13 @@ public class MainView extends JFrame implements Observer {
 		}
 		combo1 = new JComboBox(strArray1);
 		combo1.setAlignmentX(0.5f);
-		combo1.setBounds(x - 450, 1000, 120, 20);
+		combo1.setBounds(screen_size_x - 450, 1000, 120, 20);
 		combo2 = new JComboBox(strArray2);
 		combo2.setAlignmentX(0.5f);
-		combo2.setBounds(x - 300, 1000, 120, 20);
+		combo2.setBounds(screen_size_x - 300, 1000, 120, 20);
 		combo3 = new JComboBox(strArray3);
 		combo3.setAlignmentX(0.5f);
-		combo3.setBounds(x - 150, 1000, 120, 20);
+		combo3.setBounds(screen_size_x - 150, 1000, 120, 20);
 
 		panel.add(button1);
 		panel.add(button2);
@@ -229,7 +232,6 @@ public class MainView extends JFrame implements Observer {
 		panel.add(label4);
 		panel.add(combo3);
 		panel.add(label4);
-
 		panel.add(background);
 		getContentPane().add(panel, BorderLayout.CENTER);
 		setVisible(true);
