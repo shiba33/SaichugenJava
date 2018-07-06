@@ -7,7 +7,7 @@ import javax.swing.SwingWorker;
 
 /**
  * シュミュレーションのModelクラスを表す。 
- * @author 柴田航平 
+ * @author 柴田航平 & 鈴木大河
  */
 public class SimulationModel extends Observable {
 
@@ -184,7 +184,16 @@ public class SimulationModel extends Observable {
 	 * @return 編集後の文字列
 	 */
 	protected String cutPlayerName(String s) {
-		return s;
+		int b = 0;
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < s.length(); i++) {
+            String s1 = s.substring(i, i + 1);
+            b += s1.getBytes().length;
+            if (b > 10) {
+                break;
+            }else sb.append(s1);
+        }
+		return sb.toString();
 	}
 	/**
 	 * ターンで使用したカードの配列を取得するメソッドです。
