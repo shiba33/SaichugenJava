@@ -35,7 +35,7 @@ public class SimulationView extends JFrame implements Observer {
 	private JLabel BottomCenter = new JLabel();
 	private JLabel BottomRight = new JLabel();
 	private JButton button1 = new JButton();
-	
+
 	public void addToButton1ActionListener(ActionListener actionListener) {
 		button1.addActionListener(actionListener);
 	}
@@ -55,8 +55,9 @@ public class SimulationView extends JFrame implements Observer {
 		getContentPane().revalidate();
 		getContentPane().repaint();
 		p.setLayout(layout);
-		
-		if ((info.getRoundNum() == 5)||((info.getRoundNum() == 1) && (info.getTurnNum() == 1))){
+
+		// 画面生成
+		if ((info.getRoundNum() == 1) && (info.getTurnNum() == 1)){
 			setTitle("最中限 -シミュレーション-");
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			setSize(1280, 720);
@@ -64,8 +65,7 @@ public class SimulationView extends JFrame implements Observer {
 			setVisible(true);
 		}
 
-		if (info.getRoundNum() < 4) {
-
+		if (info.getGameStatus() == 1) { // ゲーム中の描画
 			labelTop.setText("ラウンド: " + info.getRoundNum() + " , ターン: " + info.getTurnNum());
 			labelTop.setFont(new Font("MS　ゴシック", Font.BOLD, 60));
 			labelTop.setForeground(Color.BLACK);
@@ -202,7 +202,7 @@ public class SimulationView extends JFrame implements Observer {
 
 			getContentPane().add(p, BorderLayout.CENTER);
 
-		} else if (info.getRoundNum() == 4) {
+		} else if (info.getGameStatus() == 2) { // 最終結果の描画
 			if(Objects.nonNull(arg)){
 				setVisible(false);
 				dispose();
@@ -223,49 +223,95 @@ public class SimulationView extends JFrame implements Observer {
 			gbc.anchor = GridBagConstraints.CENTER;
 			gbc.fill = GridBagConstraints.BOTH;
 			layout.setConstraints(labelTop, gbc);
-			
-			
-			labelLeft.setText(score.getRoundRanking()[0] + "位 : " + playerName[0]);
-			labelLeft.setFont(new Font("MS　ゴシック", Font.BOLD, 60));
-			labelLeft.setHorizontalAlignment(JLabel.CENTER);
-			labelLeft.setIcon(null);
-			gbc.gridx = 0;
-			gbc.gridy = 1;
-			gbc.gridwidth = 4;
-			gbc.gridheight = 1;
-			gbc.weightx = 1.0;
-			gbc.weighty = 1.0;
-			gbc.anchor = GridBagConstraints.CENTER;
-			gbc.fill = GridBagConstraints.BOTH;
-			layout.setConstraints(labelLeft, gbc);
 
-			labelCenter.setText(score.getRoundRanking()[1] + "位 : " + playerName[1]);
-			labelCenter.setFont(new Font("MS　ゴシック", Font.BOLD, 60));
-			labelCenter.setHorizontalAlignment(JLabel.CENTER);
-			labelCenter.setIcon(null);
-			gbc.gridx = 0;
-			gbc.gridy = 2;
-			gbc.gridwidth = 4;
-			gbc.gridheight = 1;
-			gbc.weightx = 1.0;
-			gbc.weighty = 1.0;
-			gbc.anchor = GridBagConstraints.CENTER;
-			gbc.fill = GridBagConstraints.BOTH;
-			layout.setConstraints(labelCenter, gbc);
+			for(int i=0;i<3;i++){ // 結果の描画
+				if(score.getRoundRanking()[i]==3||(score.getRoundRanking()[i]==2&&i==1)||i==0){
+					labelRight.setText(score.getRoundRanking()[i] + "位 : " + playerName[i]);
+					labelRight.setFont(new Font("MS　ゴシック", Font.BOLD, 60));
+					labelRight.setHorizontalAlignment(JLabel.CENTER);
+					labelRight.setIcon(null);
+					gbc.gridx = 0;
+					gbc.gridy = 3;
+					gbc.gridwidth = 4;
+					gbc.gridheight = 1;
+					gbc.weightx = 1.0;
+					gbc.weighty = 1.0;
+					gbc.anchor = GridBagConstraints.CENTER;
+					gbc.fill = GridBagConstraints.BOTH;
+					layout.setConstraints(labelRight, gbc);
 
-			labelRight.setText(score.getRoundRanking()[2] + "位 : " + playerName[2]);
-			labelRight.setFont(new Font("MS　ゴシック", Font.BOLD, 60));
-			labelRight.setHorizontalAlignment(JLabel.CENTER);
-			labelRight.setIcon(null);
+				}if(score.getRoundRanking()[i]==2||(score.getRoundRanking()[i]==1&&i==1)||i==0){
+					labelCenter.setText(score.getRoundRanking()[i] + "位 : " + playerName[i]);
+					labelCenter.setFont(new Font("MS　ゴシック", Font.BOLD, 60));
+					labelCenter.setHorizontalAlignment(JLabel.CENTER);
+					labelCenter.setIcon(null);
+					gbc.gridx = 0;
+					gbc.gridy = 2;
+					gbc.gridwidth = 4;
+					gbc.gridheight = 1;
+					gbc.weightx = 1.0;
+					gbc.weighty = 1.0;
+					gbc.anchor = GridBagConstraints.CENTER;
+					gbc.fill = GridBagConstraints.BOTH;
+					layout.setConstraints(labelCenter, gbc);
+
+				}if(score.getRoundRanking()[i]==1||i==0){
+					labelLeft.setText(score.getRoundRanking()[i] + "位 : " + playerName[i]);
+					labelLeft.setFont(new Font("MS　ゴシック", Font.BOLD, 60));
+					labelLeft.setHorizontalAlignment(JLabel.CENTER);
+					labelLeft.setIcon(null);
+					gbc.gridx = 0;
+					gbc.gridy = 1;
+					gbc.gridwidth = 4;
+					gbc.gridheight = 1;
+					gbc.weightx = 1.0;
+					gbc.weighty = 1.0;
+					gbc.anchor = GridBagConstraints.CENTER;
+					gbc.fill = GridBagConstraints.BOTH;
+					layout.setConstraints(labelLeft, gbc);
+				}
+				button1.setText("メニューに戻る");
+				button1.setPreferredSize(new Dimension(300, 100));
+				button1.setFont(new Font("MS　ゴシック", Font.PLAIN, 35));
+				button1.setMargin(new Insets(10, 10, 10, 10));
+				button1.setActionCommand("GoBack");
+				gbc.gridx = 1;
+				gbc.gridy = 4;
+				gbc.gridwidth = 2;
+				gbc.gridheight = 1;
+				gbc.weightx = 1.0;
+				gbc.weighty = 1.0;
+				gbc.anchor = GridBagConstraints.CENTER;
+				gbc.fill = GridBagConstraints.NONE;
+				layout.setConstraints(button1, gbc);
+			}
+			p.add(labelTop);
+			p.add(labelLeft);
+			p.add(labelCenter);
+			p.add(labelRight);
+			p.add(button1);
+
+			getContentPane().add(p, BorderLayout.CENTER);
+		}else if(info.getGameStatus() == 5){ // 値異常時のエラー描画
+			if(Objects.nonNull(arg)){
+				setVisible(false);
+				dispose();
+			}
+			labelTop.setText("値が不正です");
+			labelTop.setFont(new Font("MS　ゴシック", Font.BOLD, 60));
+			labelTop.setForeground(Color.BLACK);
+			labelTop.setBackground(Color.YELLOW);
+			labelTop.setHorizontalAlignment(JLabel.CENTER);
+			labelTop.setOpaque(true);
 			gbc.gridx = 0;
-			gbc.gridy = 3;
+			gbc.gridy = 0;
 			gbc.gridwidth = 4;
 			gbc.gridheight = 1;
 			gbc.weightx = 1.0;
 			gbc.weighty = 1.0;
 			gbc.anchor = GridBagConstraints.CENTER;
 			gbc.fill = GridBagConstraints.BOTH;
-			layout.setConstraints(labelRight, gbc);
+			layout.setConstraints(labelTop, gbc);
 
 			button1.setText("メニューに戻る");
 			button1.setPreferredSize(new Dimension(300, 100));
@@ -283,18 +329,17 @@ public class SimulationView extends JFrame implements Observer {
 			layout.setConstraints(button1, gbc);
 
 			p.add(labelTop);
-			p.add(labelLeft);
 			p.add(labelCenter);
-			p.add(labelRight);
 			p.add(button1);
 
 			getContentPane().add(p, BorderLayout.CENTER);
+
 		}else {
 			if(Objects.nonNull(arg)){
 				setVisible(false);
 				dispose();
 			}
-			labelTop.setText("値が不正です");
+			labelTop.setText("不明なエラー");
 			labelTop.setFont(new Font("MS　ゴシック", Font.BOLD, 60));
 			labelTop.setForeground(Color.BLACK);
 			labelTop.setBackground(Color.YELLOW);

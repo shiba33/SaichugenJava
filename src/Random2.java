@@ -10,7 +10,7 @@ import framework.Score;
  * 無駄に長く意味不明なプレイヤー名を指定するクラスです。
  * 手札からランダムなカードを出します。
  * 
- * @author 柴田航平 & 鈴木大河
+ * @author 鈴木大河
  * @see Player
  * @return カードの識別番号(0-51)
  */

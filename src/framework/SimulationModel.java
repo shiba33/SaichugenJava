@@ -76,6 +76,7 @@ public class SimulationModel extends Observable {
 		SwingWorker<Object, Object[]> sw = new SwingWorker<Object, Object[]>() {
 			@Override
 			protected Object doInBackground() throws Exception {
+				info.setGameStatus(1); // ゲームテータス:ゲーム進行中
 				for (int i = 0; i < 3; i++) {
 					for (int j = 0; j < 15; j++) {
 
@@ -103,7 +104,7 @@ public class SimulationModel extends Observable {
 						if(!tableCards.getDeepHands(0).contains(p1Hand)||
 								!tableCards.getDeepHands(1).contains(p2Hand)||
 								!tableCards.getDeepHands(2).contains(p3Hand)) {
-							info.setRoundNum(5);
+									info.setGameStatus(5); // ステータス5:不正な値検知時のエラー
 							publish();
 							return null;
 						}else {
@@ -132,7 +133,7 @@ public class SimulationModel extends Observable {
 							publish();
 
 							try {
-								Thread.sleep(500);
+								Thread.sleep(50);
 							} catch (InterruptedException e) {
 							}
 						}
@@ -147,7 +148,7 @@ public class SimulationModel extends Observable {
 					// 全てのプレイヤーのターン毎に得た得点を0クリアする。
 					score.clearTurnScore();
 				}
-				info.setRoundNum(4);
+				info.setGameStatus(2); // ステータス2:ゲーム終了
 
 				// 最終的な勝敗判定をする。
 				judge.finalJudgement(score);
