@@ -24,7 +24,7 @@ import javax.swing.JPanel;
 /**
  * メニューのViewに関わるクラスです。
  *
- * @author 柴田航平 * 古田亮汰郎
+ * @author 柴田航平 & 古田亮汰郎
  * @see Observer
  */
 public class MainView extends JFrame implements Observer {
@@ -37,8 +37,8 @@ public class MainView extends JFrame implements Observer {
 	private Dimension size;
 	private JButton button1, button2, button3, button4;
 	public JComboBox combo1, combo2, combo3;
-	int screen_size_x;
-	int screen_size_y;
+	public static int screen_size_x;
+	public static int screen_size_y;
 	private Player p1, p2, p3;
 
 	public MainView(Player player1, Player player2, Player player3) {
@@ -46,6 +46,14 @@ public class MainView extends JFrame implements Observer {
 		p1 = player1;
 		p2 = player2;
 		p3 = player3;
+	}
+
+	protected static int getSX() {
+		return screen_size_x;
+	}
+
+	protected static int getSY() {
+		return screen_size_y;
 	}
 
 	public MainView() {
@@ -116,7 +124,7 @@ public class MainView extends JFrame implements Observer {
 
 			}
 		});
-		setMinimumSize(new Dimension(640, 480));//Frameのサイズを(640×480)までしか縮小できないように設定
+		setMinimumSize(new Dimension(640, 480));//Frameのサイズを(640×480)までしか縮小できないように設定]
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		java.awt.GraphicsEnvironment env = java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment();
 		java.awt.Rectangle desktopBounds = env.getMaximumWindowBounds();
