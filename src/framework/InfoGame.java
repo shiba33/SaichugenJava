@@ -1,10 +1,14 @@
 package framework;
 
 /**
- * ゲームのターン・ラウンド数を保持するクラスです。	
+ * ゲームの状態とターン・ラウンド数を保持するクラスです。	
  * @author 柴田航平
  */
 public class InfoGame {
+	/**
+	 * ゲームの状態を表すフィールドです。
+	 */
+	private int gameStatus;
 	/**
 	 * ターン数を表すフィールドです。
 	 */
@@ -14,6 +18,13 @@ public class InfoGame {
 	 */
 	private int roundNum;
 
+	/**
+	 * ゲームのステータスを設定するメソッドです。
+	 * @param num ターン数
+	 */
+	void setGameStatus(int num) {
+		gameStatus = num;
+	}
 	/**
 	 * ターン数を設定するメソッドです。
 	 * @param num ターン数
@@ -27,6 +38,13 @@ public class InfoGame {
 	 */
 	void setRoundNum(int num) {
 		roundNum = num;
+	}
+	/**
+	 * ゲームのステータスを取得するメソッドです。
+	 * @return ゲームステータス
+	 */
+	public int getGameStatus()  {
+		return gameStatus;
 	}
 	/**
 	 * ターン数を取得するメソッドです。

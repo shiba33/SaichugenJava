@@ -7,7 +7,7 @@ import javax.swing.SwingWorker;
 
 /**
  * シュミュレーションのModelクラスを表す。 
- * @author 柴田航平 
+ * @author 柴田航平 & 鈴木大河
  */
 public class SimulationModel extends Observable {
 
@@ -59,7 +59,7 @@ public class SimulationModel extends Observable {
 		this.player2 = player2;
 		this.player3 = player3;
 	}
-	
+
 	/**
 	 * ボタン1が押したイベントの処理を記したメソッドです。
 	 */
@@ -76,6 +76,7 @@ public class SimulationModel extends Observable {
 		SwingWorker<Object, Object[]> sw = new SwingWorker<Object, Object[]>() {
 			@Override
 			protected Object doInBackground() throws Exception {
+				info.setGameStatus(1); // ゲームテータス:ゲーム進行中
 				for (int i = 0; i < 3; i++) {
 					for (int j = 0; j < 15; j++) {
 
@@ -98,47 +99,56 @@ public class SimulationModel extends Observable {
 						p1Hand = player1.strategy(tableCards.getDeepHands(0), score, 0, info);
 						p2Hand = player2.strategy(tableCards.getDeepHands(1), score, 1, info);
 						p3Hand = player3.strategy(tableCards.getDeepHands(2), score, 2, info);
+						
+						// プレイヤーの使用したカードが手札にあるか判定する。なければ異常終了
+						if(!tableCards.getDeepHands(0).contains(p1Hand)||
+								!tableCards.getDeepHands(1).contains(p2Hand)||
+								!tableCards.getDeepHands(2).contains(p3Hand)) {
+									info.setGameStatus(5); // ステータス5:不正な値検知時のエラー
+							publish();
+							return null;
+						}else {
 
-						// プレイヤーの使用したカードの削除をする。
-						tableCards.removeAndRecordCards(tableCards.getDeepHands(0), 0, p1Hand);
-						tableCards.removeAndRecordCards(tableCards.getDeepHands(1), 1, p2Hand);
-						tableCards.removeAndRecordCards(tableCards.getDeepHands(2), 2, p3Hand);
+							// プレイヤーの使用したカードの削除をする。
+							tableCards.removeAndRecordCards(tableCards.getDeepHands(0), 0, p1Hand);
+							tableCards.removeAndRecordCards(tableCards.getDeepHands(1), 1, p2Hand);
+							tableCards.removeAndRecordCards(tableCards.getDeepHands(2), 2, p3Hand);
 
-						// ターンの勝敗判定をする。
-						judge.turnJudgement(p1Hand, p2Hand, p3Hand);
-						score.setTurnScore(judge.geTurntWinner(), judge.getPoint());
+							// ターンの勝敗判定をする。
+							judge.turnJudgement(p1Hand, p2Hand, p3Hand);
+							score.setTurnScore(judge.geTurntWinner(), judge.getPoint());
 
-						// ターンの得点順位を設定する。
-						judge.turnRanking(score);
-						score.setTurnRanking(judge.getTurnRanking());
+							// ターンの得点順位を設定する。
+							judge.turnRanking(score);
+							score.setTurnRanking(judge.getTurnRanking());
 
-						// フレームへ描画の設定をする
-						playerName[0] = player1.getName();
-						playerName[1] = player2.getName();
-						playerName[2] = player3.getName();
+							// フレームへ描画の設定をする
+							playerName[0] = cutPlayerName(player1.getName());
+							playerName[1] = cutPlayerName(player2.getName());
+							playerName[2] = cutPlayerName(player3.getName());
 
-						putOutArray[0] = p1Hand;
-						putOutArray[1] = p2Hand;
-						putOutArray[2] = p3Hand;
+							putOutArray[0] = p1Hand;
+							putOutArray[1] = p2Hand;
+							putOutArray[2] = p3Hand;
+							publish();
 
-						publish();
-
-						try {
-							Thread.sleep(500);
-						} catch (InterruptedException e) {
+							try {
+								Thread.sleep(50);
+							} catch (InterruptedException e) {
+							}
 						}
 
 					}
 					judge.roundJudgement(score);
 					score.setRoundScore(judge.getRoundWinner());
-					
+
 					judge.roundRanking(score);
 					score.setRoundRanking(judge.getRoundRanking());
 
 					// 全てのプレイヤーのターン毎に得た得点を0クリアする。
 					score.clearTurnScore();
 				}
-				info.setRoundNum(4);
+				info.setGameStatus(2); // ステータス2:ゲーム終了
 
 				// 最終的な勝敗判定をする。
 				judge.finalJudgement(score);
@@ -169,6 +179,14 @@ public class SimulationModel extends Observable {
 	 */
 	protected String[] getAllPlayerName() {
 		return playerName;
+	}
+	/**
+	 * 文字列を一定の長さ(10byte)にカットするメソッドです。
+	 * @param s 編集元の文字列
+	 * @return 編集後の文字列
+	 */
+	protected String cutPlayerName(String s) {
+		return StringTools.cutString(s,10);
 	}
 	/**
 	 * ターンで使用したカードの配列を取得するメソッドです。
