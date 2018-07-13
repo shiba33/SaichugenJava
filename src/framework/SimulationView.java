@@ -6,7 +6,6 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.Insets;
 import java.awt.event.ActionListener;
 import java.util.Objects;
 import java.util.Observable;
@@ -89,23 +88,10 @@ public class SimulationView extends JFrame implements Observer {
 		p.setLayout(null);
 		if (info.getGameStatus() == 1) {
 
-			if ((info.getRoundNum() == 1) && (info.getTurnNum() == 1)) {
-
-			}
-
 			labelTop.setText("ラウンド: " + info.getRoundNum() + "  ターン: " + info.getTurnNum());
 			labelTop.setFont(new Font("MS　ゴシック", Font.BOLD, (int) (simulation_size_x / 32)));
 			labelTop.setForeground(Color.BLACK);
 			labelTop.setOpaque(false);
-			gbc.gridx = 0;
-			gbc.gridy = 0;
-			gbc.gridwidth = 2;
-			gbc.gridheight = 1;
-			gbc.weightx = 1.0;
-			gbc.weighty = 0.2;
-			gbc.anchor = GridBagConstraints.CENTER;
-			gbc.fill = GridBagConstraints.BOTH;
-			layout.setConstraints(labelTop, gbc);
 
 			int gridxValue;
 			int turnWinner = judge.geTurntWinner();
@@ -121,54 +107,18 @@ public class SimulationView extends JFrame implements Observer {
 					simulation_size_y / 12);
 			labelWin.setHorizontalAlignment(JLabel.CENTER);
 			labelWin.setIcon(resizing_win);
-			gbc.gridx = gridxValue;
-			gbc.gridy = 1;
-			gbc.gridwidth = 1;
-			gbc.gridheight = 1;
-			gbc.weightx = 1.0;
-			gbc.weighty = 0.3;
-			gbc.anchor = GridBagConstraints.CENTER;
-			gbc.fill = GridBagConstraints.BOTH;
-			layout.setConstraints(labelWin, gbc);
 
 			cardsLeft.setText(null);
 			cardsLeft.setHorizontalAlignment(JLabel.CENTER);
 			cardsLeft.setIcon(convert_Card[putOutArray[0]]);
-			gbc.gridx = 0;
-			gbc.gridy = 2;
-			gbc.gridwidth = 1;
-			gbc.gridheight = 1;
-			gbc.weightx = 1.0;
-			gbc.weighty = 1.0;
-			gbc.anchor = GridBagConstraints.CENTER;
-			gbc.fill = GridBagConstraints.BOTH;
-			layout.setConstraints(cardsLeft, gbc);
 
 			cardsCenter.setText(null);
 			cardsCenter.setHorizontalAlignment(JLabel.CENTER);
 			cardsCenter.setIcon(convert_Card[putOutArray[1]]);
-			gbc.gridx = 1;
-			gbc.gridy = 2;
-			gbc.gridwidth = 1;
-			gbc.gridheight = 1;
-			gbc.weightx = 1.0;
-			gbc.weighty = 1.0;
-			gbc.anchor = GridBagConstraints.CENTER;
-			gbc.fill = GridBagConstraints.BOTH;
-			layout.setConstraints(cardsCenter, gbc);
 
 			cardsRight.setText(null);
 			cardsRight.setHorizontalAlignment(JLabel.CENTER);
 			cardsRight.setIcon(convert_Card[putOutArray[2]]);
-			gbc.gridx = 2;
-			gbc.gridy = 2;
-			gbc.gridwidth = 1;
-			gbc.gridheight = 1;
-			gbc.weightx = 1.0;
-			gbc.weighty = 1.0;
-			gbc.anchor = GridBagConstraints.CENTER;
-			gbc.fill = GridBagConstraints.BOTH;
-			layout.setConstraints(cardsRight, gbc);
 
 			NameLeft.setText("名前 : " + playerName[0]);
 			NameLeft.setFont(new Font("MS　ゴシック", Font.BOLD, (int) (simulation_size_x / 38.4)));
@@ -182,15 +132,6 @@ public class SimulationView extends JFrame implements Observer {
 			RoundsWinLeft.setFont(new Font("MS　ゴシック", Font.BOLD, (int) (simulation_size_x / 38.4)));
 			RoundsWinLeft.setForeground(Color.WHITE);
 			RoundsWinLeft.setOpaque(false);
-
-			gbc.gridx = 0;
-			gbc.gridy = 3;
-			gbc.gridwidth = 1;
-			gbc.gridheight = 1;
-			gbc.weightx = 1.0;
-			gbc.weighty = 0.2;
-			gbc.fill = GridBagConstraints.BOTH;
-			layout.setConstraints(NameLeft, gbc);
 
 			NameCenter.setText("名前 : " + playerName[1]);
 			NameCenter.setFont(
@@ -208,15 +149,6 @@ public class SimulationView extends JFrame implements Observer {
 			RoundsWinCenter.setForeground(Color.WHITE);
 			RoundsWinCenter.setOpaque(false);
 
-			gbc.gridx = 1;
-			gbc.gridy = 3;
-			gbc.gridwidth = 1;
-			gbc.gridheight = 1;
-			gbc.weightx = 1.0;
-			gbc.weighty = 0.2;
-			gbc.fill = GridBagConstraints.BOTH;
-			layout.setConstraints(NameCenter, gbc);
-
 			NameRight.setText("名前 : " + playerName[2]);
 			NameRight.setFont(new Font("MS　ゴシック", Font.BOLD, (int) (simulation_size_x / 38.4)));
 			NameRight.setForeground(Color.WHITE);
@@ -230,19 +162,11 @@ public class SimulationView extends JFrame implements Observer {
 			RoundsWinRight.setForeground(Color.WHITE);
 			RoundsWinRight.setOpaque(false);
 
-			gbc.gridx = 2;
-			gbc.gridy = 3;
-			gbc.gridwidth = 1;
-			gbc.gridheight = 1;
-			gbc.weightx = 1.0;
-			gbc.weighty = 0.2;
-			gbc.fill = GridBagConstraints.BOTH;
-			layout.setConstraints(NameRight, gbc);
 			/*変更*/
 			ImageIcon backImg = new ImageIcon("./image/SimBack.jpg");
 			ImageIcon resizing_back = ResizingImage.resizeIcon(backImg, simulation_size_x, simulation_size_y);
 			background.setIcon(resizing_back);
-			background.setBounds(0, 0, simulation_size_x, simulation_size_y);//後から変更サイズ
+			background.setBounds(0, 0, simulation_size_x, simulation_size_y);
 			labelTop.setBounds((int) (simulation_size_x / 2 - (simulation_size_x / 2.93 / 2)),
 					22 + (simulation_size_y / -48),
 					(int) (simulation_size_x / 2.93),
@@ -303,10 +227,10 @@ public class SimulationView extends JFrame implements Observer {
 			cardsLeft.setBounds((int) (simulation_size_x / 2 - (simulation_size_x / 6.4 * 2)),
 					(int) (simulation_size_y / 4),
 					(int) (simulation_size_x / 6.4), (int) (simulation_size_y / 2.4));
-			cardsRight.setBounds((int) (simulation_size_x / 2 - (simulation_size_x / 6.4 / 2)),
+			cardsCenter.setBounds((int) (simulation_size_x / 2 - (simulation_size_x / 6.4 / 2)),
 					(int) (simulation_size_y / 4),
 					(int) (simulation_size_x / 6.4), (int) (simulation_size_y / 2.4));
-			cardsCenter.setBounds((int) (simulation_size_x / 2 + (simulation_size_x / 6.4)),
+			cardsRight.setBounds((int) (simulation_size_x / 2 + (simulation_size_x / 6.4)),
 					(int) (simulation_size_y / 4),
 					(int) (simulation_size_x / 6.4), (int) (simulation_size_y / 2.4));
 
@@ -388,60 +312,24 @@ public class SimulationView extends JFrame implements Observer {
 			labelTop.setFont(new Font("MS　ゴシック", Font.BOLD, (int) (simulation_size_x / 19.2)));
 			labelTop.setHorizontalAlignment(JLabel.CENTER);
 			labelTop.setOpaque(false);
-			gbc.gridx = 0;
-			gbc.gridy = 0;
-			gbc.gridwidth = 4;
-			gbc.gridheight = 1;
-			gbc.weightx = 1.0;
-			gbc.weighty = 1.0;
-			gbc.anchor = GridBagConstraints.CENTER;
-			gbc.fill = GridBagConstraints.BOTH;
-			layout.setConstraints(labelTop, gbc);
 
 			for (int i = 0; i < 3; i++) { // 結果の描画
 				if (score.getRoundRanking()[i] == 3 || (score.getRoundRanking()[i] == 2 && i == 1) || i == 0) {
 					cardsRight.setText(score.getRoundRanking()[i] + "位 : " + playerName[i]);
 					cardsRight.setFont(new Font("MS　ゴシック", Font.BOLD, (int) (simulation_size_x / 24)));
 					cardsRight.setIcon(null);
-					gbc.gridx = 0;
-					gbc.gridy = 3;
-					gbc.gridwidth = 4;
-					gbc.gridheight = 1;
-					gbc.weightx = 1.0;
-					gbc.weighty = 1.0;
-					gbc.anchor = GridBagConstraints.CENTER;
-					gbc.fill = GridBagConstraints.BOTH;
-					layout.setConstraints(cardsRight, gbc);
 
 				}
 				if (score.getRoundRanking()[i] == 2 || (score.getRoundRanking()[i] == 1 && i == 1) || i == 0) {
 					cardsCenter.setText(score.getRoundRanking()[i] + "位 : " + playerName[i]);
 					cardsCenter.setFont(new Font("MS　ゴシック", Font.BOLD, (int) (simulation_size_x / 24)));
 					cardsCenter.setIcon(null);
-					gbc.gridx = 0;
-					gbc.gridy = 2;
-					gbc.gridwidth = 4;
-					gbc.gridheight = 1;
-					gbc.weightx = 1.0;
-					gbc.weighty = 1.0;
-					gbc.anchor = GridBagConstraints.CENTER;
-					gbc.fill = GridBagConstraints.BOTH;
-					layout.setConstraints(cardsCenter, gbc);
 
 				}
 				if (score.getRoundRanking()[i] == 1 || i == 0) {
 					cardsLeft.setText(score.getRoundRanking()[i] + "位 : " + playerName[i]);
 					cardsLeft.setFont(new Font("MS　ゴシック", Font.BOLD, (int) (simulation_size_x / 24)));
 					cardsLeft.setIcon(null);
-					gbc.gridx = 0;
-					gbc.gridy = 1;
-					gbc.gridwidth = 4;
-					gbc.gridheight = 1;
-					gbc.weightx = 1.0;
-					gbc.weighty = 1.0;
-					gbc.anchor = GridBagConstraints.CENTER;
-					gbc.fill = GridBagConstraints.BOTH;
-					layout.setConstraints(cardsLeft, gbc);
 				}
 
 			}
@@ -486,40 +374,41 @@ public class SimulationView extends JFrame implements Observer {
 			}
 			setTitle("最中限" + "(" + simulation_size_x + "×" + simulation_size_y + ")" + " -シミュレーション- (エラー)");
 			labelTop.setText("値が不正です");
-			labelTop.setFont(new Font("MS　ゴシック", Font.BOLD, 60));
+			labelTop.setFont(new Font("MS　ゴシック", Font.BOLD, (int) (simulation_size_x / 19.2)));
 			labelTop.setForeground(Color.BLACK);
-			labelTop.setBackground(Color.YELLOW);
 			labelTop.setHorizontalAlignment(JLabel.CENTER);
-			labelTop.setOpaque(true);
-			gbc.gridx = 0;
-			gbc.gridy = 0;
-			gbc.gridwidth = 4;
-			gbc.gridheight = 1;
-			gbc.weightx = 1.0;
-			gbc.weighty = 1.0;
-			gbc.anchor = GridBagConstraints.CENTER;
-			gbc.fill = GridBagConstraints.BOTH;
-			layout.setConstraints(labelTop, gbc);
+			labelTop.setOpaque(false);
 
-			button1.setText("メニューに戻る");
-			button1.setPreferredSize(new Dimension(300, 100));
-			button1.setFont(new Font("MS　ゴシック", Font.PLAIN, 35));
-			button1.setMargin(new Insets(10, 10, 10, 10));
+			ImageIcon backImg = new ImageIcon("./image/SimBack.jpg");
+			ImageIcon resizing_back = ResizingImage.resizeIcon(backImg, simulation_size_x, simulation_size_y);
+			background.setIcon(resizing_back);
+			background.setBounds(0, 0, simulation_size_x, simulation_size_y);
+
+			labelTop.setBounds((int) (simulation_size_x / 2 - (simulation_size_x / 2.93 / 2)),
+					33 + (simulation_size_y / -48),
+					(int) (simulation_size_x / 2.93),
+					(int) (simulation_size_y / 8.06));
+
+			button1.setContentAreaFilled(false);
+			button1.setBorderPainted(false);
+			button1.setIcon(resizing_Button1);
+			button1.setRolloverIcon(resizing_Button2);
+			button1.setAlignmentX(0.5f);
 			button1.setActionCommand("GoBack");
-			gbc.gridx = 1;
-			gbc.gridy = 4;
-			gbc.gridwidth = 2;
-			gbc.gridheight = 1;
-			gbc.weightx = 1.0;
-			gbc.weighty = 1.0;
-			gbc.anchor = GridBagConstraints.CENTER;
-			gbc.fill = GridBagConstraints.NONE;
-			layout.setConstraints(button1, gbc);
+			button1.setBounds(simulation_size_x / 2 + simulation_size_x / 4, simulation_size_y / 24,
+					(int) (simulation_size_x / 6.4),
+					(int) (simulation_size_y / 10.8));
+
+			cardsLeft.setIcon(null);
+			cardsCenter.setIcon(null);
+			cardsRight.setIcon(null);
+			Round.setIcon(null);
+			labelWin.setIcon(null);
 
 			p.add(labelTop);
 			p.add(cardsCenter);
 			p.add(button1);
-
+			p.add(background);
 			getContentPane().add(p, BorderLayout.CENTER);
 
 		} else {
@@ -529,39 +418,41 @@ public class SimulationView extends JFrame implements Observer {
 			}
 			setTitle("最中限" + "(" + simulation_size_x + "×" + simulation_size_y + ")" + " -シミュレーション- (エラー)");
 			labelTop.setText("不明なエラー");
-			labelTop.setFont(new Font("MS　ゴシック", Font.BOLD, 60));
+			labelTop.setFont(new Font("MS　ゴシック", Font.BOLD, (int) (simulation_size_x / 19.2)));
 			labelTop.setForeground(Color.BLACK);
-			labelTop.setBackground(Color.YELLOW);
 			labelTop.setHorizontalAlignment(JLabel.CENTER);
-			labelTop.setOpaque(true);
-			gbc.gridx = 0;
-			gbc.gridy = 0;
-			gbc.gridwidth = 4;
-			gbc.gridheight = 1;
-			gbc.weightx = 1.0;
-			gbc.weighty = 1.0;
-			gbc.anchor = GridBagConstraints.CENTER;
-			gbc.fill = GridBagConstraints.BOTH;
-			layout.setConstraints(labelTop, gbc);
+			labelTop.setOpaque(false);
 
-			button1.setText("メニューに戻る");
-			button1.setPreferredSize(new Dimension(300, 100));
-			button1.setFont(new Font("MS　ゴシック", Font.PLAIN, 35));
-			button1.setMargin(new Insets(10, 10, 10, 10));
+			ImageIcon backImg = new ImageIcon("./image/SimBack.jpg");
+			ImageIcon resizing_back = ResizingImage.resizeIcon(backImg, simulation_size_x, simulation_size_y);
+			background.setIcon(resizing_back);
+			background.setBounds(0, 0, simulation_size_x, simulation_size_y);
+
+			labelTop.setBounds((int) (simulation_size_x / 2 - (simulation_size_x / 2.93 / 2)),
+					33 + (simulation_size_y / -48),
+					(int) (simulation_size_x / 2.93),
+					(int) (simulation_size_y / 8.06));
+
+			button1.setContentAreaFilled(false);
+			button1.setBorderPainted(false);
+			button1.setIcon(resizing_Button1);
+			button1.setRolloverIcon(resizing_Button2);
+			button1.setAlignmentX(0.5f);
 			button1.setActionCommand("GoBack");
-			gbc.gridx = 1;
-			gbc.gridy = 4;
-			gbc.gridwidth = 2;
-			gbc.gridheight = 1;
-			gbc.weightx = 1.0;
-			gbc.weighty = 1.0;
-			gbc.anchor = GridBagConstraints.CENTER;
-			gbc.fill = GridBagConstraints.NONE;
-			layout.setConstraints(button1, gbc);
+			button1.setBounds(simulation_size_x / 2 + simulation_size_x / 4, simulation_size_y / 24,
+					(int) (simulation_size_x / 6.4),
+					(int) (simulation_size_y / 10.8));
+
+			cardsLeft.setIcon(null);
+			cardsCenter.setIcon(null);
+			cardsRight.setIcon(null);
+			Round.setIcon(null);
+			labelWin.setIcon(null);
 
 			p.add(labelTop);
 			p.add(cardsCenter);
 			p.add(button1);
+			p.add(background);
 
 			getContentPane().add(p, BorderLayout.CENTER);
 
