@@ -312,7 +312,9 @@ public class SimulationView extends JFrame implements Observer {
 			labelTop.setFont(new Font("MS　ゴシック", Font.BOLD, (int) (simulation_size_x / 19.2)));
 			labelTop.setHorizontalAlignment(JLabel.CENTER);
 			labelTop.setOpaque(false);
-
+			RoundsWinLeft.setText("ラウンド勝利数 : " + score.getRoundScore(0));
+			RoundsWinCenter.setText("ラウンド勝利数 : " + score.getRoundScore(1));
+			RoundsWinRight.setText("ラウンド勝利数 : " + score.getRoundScore(2));
 			for (int i = 0; i < 3; i++) { // 結果の描画
 				if (score.getRoundRanking()[i] == 3 || (score.getRoundRanking()[i] == 2 && i == 1) || i == 0) {
 					cardsRight.setText(score.getRoundRanking()[i] + "位 : " + playerName[i]);
@@ -352,6 +354,7 @@ public class SimulationView extends JFrame implements Observer {
 			cardsLeft.setForeground(Color.BLACK);
 			cardsCenter.setForeground(Color.BLACK);
 			cardsRight.setForeground(Color.BLACK);
+
 			cardsLeft.setBounds(simulation_size_x / 2 - (simulation_size_x / 3 / 2),
 					simulation_size_y / 4 + simulation_size_y / 14,
 					simulation_size_x / 3, simulation_size_y / 14);
