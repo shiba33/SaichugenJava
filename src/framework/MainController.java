@@ -13,9 +13,14 @@ import java.awt.event.ActionListener;
 public class MainController implements ActionListener {
 	private MainModel mm;
 	private MainView mv;
+	
 	private SimulationModel sm;
 	private SimulationView sv;
 	private SimulationController sc;
+	
+	private HelpView hv;
+	private HelpModel hm;
+	private HelpController hc;
 
 	public MainController(MainModel model, MainView view) {
 		mm = model;
@@ -26,6 +31,7 @@ public class MainController implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 
 		if (e.getActionCommand().equals("GameStart")) {
+		// Game
 		} else if (e.getActionCommand().equals("Simulation")) {
 			try {
 				@SuppressWarnings("unchecked")
@@ -53,6 +59,15 @@ public class MainController implements ActionListener {
 			sm.simulation();
 
 		} else if (e.getActionCommand().equals("Rule")) {
+			hm = new HelpModel();
+			hv = new HelpView();
+			hc = new HelpController(mm,hm);
+			
+			hv.addToButton1ActionListener((ActionListener) hc);
+			hm.addObserver(hv);
+			
+			mm.setButton3();
+			hm.help();
 		}
 
 	}

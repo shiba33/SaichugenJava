@@ -55,6 +55,8 @@ public class MainModel extends Observable{
 	 */
 	public void setButton3() {
 		button3 = (button3 + 1) % 2;
+		setChanged();
+		notifyObservers();
 	}
 	
 	/**
