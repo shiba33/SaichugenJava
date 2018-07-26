@@ -165,7 +165,8 @@ public class PlayGameModel extends Observable {
 					score.clearTurnScore();
 				}
 				info.setGameStatus(2); // ステータス2:ゲーム終了
-
+				PlayGameView.lock2 = false;
+				PlayGameView.str = null;
 				// 最終的な勝敗判定をする。
 				judge.finalJudgement(score);
 				score.setFinalScore(judge.getFinalWinner());

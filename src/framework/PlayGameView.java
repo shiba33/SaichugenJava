@@ -864,6 +864,10 @@ public class PlayGameView extends JFrame implements Observer {
 				dispose();
 			}
 			setTitle("最中限" + "(" + simulation_size_x + "×" + simulation_size_y + ")" + " -シミュレーション- (結果)");
+			for (int i = 16; i >= 0; i--) {
+				cardsHands[i].setIcon(null);
+			}
+			Enter.setIcon(null);
 			labelTop.setText("最終結果");
 			labelTop.setFont(new Font("MS　ゴシック", Font.BOLD, (int) (simulation_size_x / 19.2)));
 			labelTop.setHorizontalAlignment(JLabel.CENTER);
@@ -936,6 +940,10 @@ public class PlayGameView extends JFrame implements Observer {
 				dispose();
 			}
 			setTitle("最中限" + "(" + simulation_size_x + "×" + simulation_size_y + ")" + " -シミュレーション- (エラー)");
+			for (int i = 16; i >= 0; i--) {
+				cardsHands[i].setIcon(null);
+			}
+			Enter.setIcon(null);
 			labelTop.setText("値が不正です");
 			labelTop.setFont(new Font("MS　ゴシック", Font.BOLD, (int) (simulation_size_x / 19.2)));
 			labelTop.setForeground(Color.BLACK);
@@ -981,6 +989,10 @@ public class PlayGameView extends JFrame implements Observer {
 			}
 			setTitle("最中限" + "(" + simulation_size_x + "×" + simulation_size_y + ")" + " -シミュレーション- (エラー)");
 			labelTop.setText("不明なエラー");
+			for (int i = 16; i >= 0; i--) {
+				cardsHands[i].setIcon(null);
+			}
+			Enter.setIcon(null);
 			labelTop.setFont(new Font("MS　ゴシック", Font.BOLD, (int) (simulation_size_x / 19.2)));
 			labelTop.setForeground(Color.BLACK);
 			labelTop.setHorizontalAlignment(JLabel.CENTER);
