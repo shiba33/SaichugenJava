@@ -28,6 +28,12 @@ public class HelpController implements ActionListener {
 			hm.clickedButton1();
 			mm.setButton3();
 		}
+		if(e.getActionCommand().equals("Back")) {
+			hm.clickedButton2();
+		}
+		if(e.getActionCommand().equals("Next")) {
+			hm.clickedButton3();
+		}
 	}
 
 }

@@ -19,6 +19,7 @@ public class HelpModel extends Observable {
 	 * 紙芝居の枚数を保持するフィールドです。
 	 */
 	private int helpMaxPage = 3;
+	private boolean goBack = true;
 	
 	public HelpModel() {
 		
@@ -28,8 +29,19 @@ public class HelpModel extends Observable {
 	 * ボタン1が押したイベントの処理を記したメソッドです。
 	 */
 	public void clickedButton1() {
+		goBack = false;
 		setChanged();
 		notifyObservers("hide");
+	}
+	public void clickedButton2() {
+		helpStatus--;
+		if(helpStatus<0)helpStatus=helpMaxPage;
+		setChanged();
+	}
+	public void clickedButton3() {
+		helpStatus++;
+		if(helpStatus>helpMaxPage)helpStatus=0;
+		setChanged();
 	}
 
 	/**
@@ -40,16 +52,13 @@ public class HelpModel extends Observable {
 		SwingWorker<Object, Object[]> sw = new SwingWorker<Object, Object[]>() {
 			@Override
 			protected Object doInBackground() throws Exception {
-				for(int i = 0;i<helpMaxPage;i++) {
-					setHelpStatus(i);
+				do{
 					publish();
 					try {
-						Thread.sleep(10000);
+						Thread.sleep(100);
 					} catch (InterruptedException e) {
-
 					}
-				}
-				setHelpStatus(helpMaxPage);
+				}while(goBack);
 				return null;
 			}
 
@@ -95,6 +104,9 @@ public class HelpModel extends Observable {
 	 */
 	protected int getHelpMaxPage() {
 		return helpMaxPage;
+	}
+	protected boolean checkHelpPage(int nextHelpStatus) {
+		return helpMaxPage>=nextHelpStatus && nextHelpStatus>=0;
 	}
 
 }

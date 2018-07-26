@@ -26,67 +26,82 @@ import main.Main;
  */
 public class HelpView extends JFrame implements Observer {
 	private GridBagLayout layout = new GridBagLayout();
-	private JPanel p = new JPanel();
-	private JLabel img = new JLabel();
+	private JPanel mainPanel = new JPanel();
+	private JPanel buttonPanel = new JPanel();
 	private JButton button1 = new JButton();
+	private JButton button2 = new JButton();
+	private JButton button3 = new JButton();
+	private JLabel img = new JLabel();
 	private ImageIcon helpImg;
 
 	public HelpView() {
 
 	}
 	
-	public void addToButton1ActionListener(ActionListener actionListener) {
+	public void addToButtonsActionListener(ActionListener actionListener) {
 		button1.addActionListener(actionListener);
+		button2.addActionListener(actionListener);
+		button3.addActionListener(actionListener);
+	}
+	
+	public void helpWindowSet() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setSize(640, 530);
+		setLocationRelativeTo(null);
+		setVisible(true);
+		setResizable(false);
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
 
 		HelpModel help = (HelpModel) o;
-		p.removeAll();
+		mainPanel.removeAll();
 		getContentPane().removeAll();
 		getContentPane().revalidate();
 		getContentPane().repaint();
-		p.setLayout(layout);
+		mainPanel.setLayout(layout);
+		mainPanel.setPreferredSize(new Dimension(640, 480));
 		
 		// ウィンドタイトルの修正と紙芝居の差し替え
 		setTitle("最中限 -ヘルプ"+(help.getHelpStatus()+1)+"-");
 		helpImg = new ImageIcon("./image/help"+help.getHelpStatus()+".png");
 		img.setIcon(helpImg);
 		img.setBounds(0, 0, 640, 480);
+		
+		// ヘルプのコントローラー(ボタン)の設定
+		button1.setText("メニューに戻る");
+		button1.setActionCommand("GoBack");
+		button1.setFont(new Font("MS　ゴシック", Font.PLAIN, 16));
+		button1.setPreferredSize(new Dimension(200,40));
+		
+		button2.setText("戻る");
+		button2.setActionCommand("Back");
+		button2.setFont(new Font("MS　ゴシック", Font.PLAIN, 16));
+		button2.setPreferredSize(new Dimension(200,40));
+		
+		button3.setText("進む");
+		button3.setActionCommand("Next");
+		button3.setFont(new Font("MS　ゴシック", Font.PLAIN, 16));
+		button3.setPreferredSize(new Dimension(200,40));
+		
+		buttonPanel.setPreferredSize(new Dimension(640, 50));
 
-		// 画面生成
-		if (help.getHelpStatus() == 0){
-			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			setSize(640, 480);
-			setLocationRelativeTo(null);
-			setVisible(true);
-			setResizable(false);
-		}
-		if(help.getHelpMaxPage()>help.getHelpStatus()){
+		if(help.getHelpMaxPage()>=help.getHelpStatus()){
 			if(Objects.nonNull(arg)){
 				setVisible(false);
 				dispose();
 			}
-
-			p.add(img);
-			getContentPane().add(p, BorderLayout.CENTER);
-		}else if(help.getHelpStatus()==help.getHelpMaxPage()){ 
-			if(Objects.nonNull(arg)){
-				setVisible(false);
-				dispose();
-			}
-			setTitle("最中限 -ヘルプ"+help.getHelpMaxPage()+"-");
-			button1.setIcon(helpImg);
-			button1.setPreferredSize(new Dimension(640,480));
-			button1.setActionCommand("GoBack");
-
-			p.add(button1);
-
-			getContentPane().add(p, BorderLayout.CENTER);
+			mainPanel.add(img);
+			getContentPane().add(mainPanel, BorderLayout.CENTER);
 		}else {
 			
-		}
+		}		
+		
+		buttonPanel.add(button2);
+		buttonPanel.add(button1);
+		buttonPanel.add(button3);
+		getContentPane().add(buttonPanel, BorderLayout.SOUTH);
 	}
 
 }
