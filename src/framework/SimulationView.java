@@ -4,8 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.event.ActionListener;
 import java.util.Objects;
 import java.util.Observable;
@@ -22,8 +20,6 @@ import javax.swing.JPanel;
  * @author 柴田航平 & 古田亮汰郎
  */
 public class SimulationView extends JFrame implements Observer {
-	private GridBagLayout layout = new GridBagLayout();
-	private GridBagConstraints gbc = new GridBagConstraints();
 	private JPanel p = new JPanel();
 	private JLabel Round = new JLabel();
 	private JLabel ScoreR = new JLabel();
@@ -315,7 +311,6 @@ public class SimulationView extends JFrame implements Observer {
 			RoundsWinLeft.setText("ラウンド勝利数 : " + score.getRoundScore(0));
 			RoundsWinCenter.setText("ラウンド勝利数 : " + score.getRoundScore(1));
 			RoundsWinRight.setText("ラウンド勝利数 : " + score.getRoundScore(2));
-
 			boolean isCheck1 = false, isCheck2 = false, isCheck3 = false;
 			//　組み合わせパターン => (Left, Center, Right) = (1, 1, 1), (1, 1, 3), (1, 2, 2), (1, 2,  3)
 			for (int i = 0; i < 3; i++) { // 結果の描画
@@ -324,14 +319,14 @@ public class SimulationView extends JFrame implements Observer {
 					cardsLeft.setFont(new Font("MS　ゴシック", Font.BOLD, (int) (simulation_size_x / 24)));
 					cardsLeft.setIcon(null);
 					isCheck1 = true;
-				}else if ((score.getRoundRanking()[i] == 2 && !isCheck2)  // -> ランキング2位で、未だ設定していない。 (?, ?, ?)
+				} else if ((score.getRoundRanking()[i] == 2 && !isCheck2) // -> ランキング2位で、未だ設定していない。 (?, ?, ?)
 						|| (score.getRoundRanking()[i] == 1 && isCheck1 && !isCheck2)) { // -> ランキング1位で、未だ設定していない。(1, ?, ?)
 					cardsCenter.setText(score.getRoundRanking()[i] + "位 : " + playerName[i]);
 					cardsCenter.setFont(new Font("MS　ゴシック", Font.BOLD, (int) (simulation_size_x / 24)));
 					cardsCenter.setIcon(null);
 					isCheck2 = true;
-				}else if ((score.getRoundRanking()[i] == 3 && !isCheck3)  // -> ランキング3位で、未だ設定していない。 (?, ?, ?)
-						|| (score.getRoundRanking()[i] == 2 && isCheck2)  // -> ランキング2位で、未だ設定していない。 (?, 2, ?)
+				} else if ((score.getRoundRanking()[i] == 3 && !isCheck3) // -> ランキング3位で、未だ設定していない。 (?, ?, ?)
+						|| (score.getRoundRanking()[i] == 2 && isCheck2) // -> ランキング2位で、未だ設定していない。 (?, 2, ?)
 						|| (score.getRoundRanking()[i] == 1 && isCheck1)) { // -> ランキング1位で、未だ設定していない。(1, 1, ?)
 					cardsRight.setText(score.getRoundRanking()[i] + "位 : " + playerName[i]);
 					cardsRight.setFont(new Font("MS　ゴシック", Font.BOLD, (int) (simulation_size_x / 24)));

@@ -107,7 +107,7 @@ public class MainView extends JFrame implements Observer {
 						screen_size_x / 3, screen_size_y / 14);
 				label2.setBounds(screen_size_x - 445,
 						screen_size_y - (100 + (screen_size_x / 128) + (screen_size_y / 72)), 120, 35);
-				label2.setFont(new Font("MS　ゴシック", Font.BOLD, screen_size_x / 128 + screen_size_y / 72));
+				label2.setFont(new Font("MS　ゴシック", Font.BOLD, 15));
 				label3.setBounds(screen_size_x - 295,
 						screen_size_y - (100 + (screen_size_x / 128) + (screen_size_y / 72)), 120, 35);
 				label3.setFont(new Font("MS　ゴシック", Font.BOLD, screen_size_x / 128 + screen_size_y / 72));
@@ -170,17 +170,17 @@ public class MainView extends JFrame implements Observer {
 
 		background.setIcon(new ImageIcon("./image/background.png"));
 
-		label2.setText("Player1");
+		label2.setText("Player or COM");
 		label2.setOpaque(false);
 		label2.setForeground(Color.WHITE);
 		label2.setAlignmentX(0.5f);
 
-		label3.setText("Player2");
+		label3.setText("COM");
 		label3.setForeground(Color.WHITE);
 		label3.setOpaque(false);
 		label3.setAlignmentX(0.5f);
 
-		label4.setText("Player3");
+		label4.setText("COM");
 		label4.setForeground(Color.WHITE);
 		label4.setOpaque(false);
 		label4.setAlignmentX(0.5f);
@@ -192,9 +192,12 @@ public class MainView extends JFrame implements Observer {
 		ArrayList<String> strList3 = new ArrayList<String>();
 		for (int i = 0; i < filelist.length; i++) {
 			if (filelist[i].isFile() && filelist[i].getName().matches(".*class")) {
-				strList1.add(filelist[i].getName());
-				strList2.add(filelist[i].getName());
-				strList3.add(filelist[i].getName());
+				if (filelist[i].getName().equals("PlayGamePlayer.class")) {
+				} else {
+					strList1.add(filelist[i].getName());
+					strList2.add(filelist[i].getName());
+					strList3.add(filelist[i].getName());
+				}
 			}
 		}
 		String[] strArray1 = new String[strList1.size()];
