@@ -18,7 +18,7 @@ public class HelpModel extends Observable {
 	/**
 	 * 紙芝居の枚数を保持するフィールドです。
 	 */
-	final private int sumHelpPage = 4;
+	final private int sumHelpPage = 10;
 	final private int helpMaxPage = sumHelpPage-1;
 	/**
 	 * 紙芝居の終了を管理するフィールドです。

@@ -64,7 +64,6 @@ public class MainController implements ActionListener {
 			hc = new HelpController(mm,hm);
 			
 			hv.addToButtonsActionListener((ActionListener) hc);
-			hv.helpWindowSet();
 			hm.addObserver(hv);
 			
 			mm.setButton3();

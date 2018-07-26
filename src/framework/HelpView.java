@@ -36,22 +36,17 @@ public class HelpView extends JFrame implements Observer {
 	private ImageIcon helpImg;
 
 	public HelpView() {
-
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setSize(640, 530);
+		setLocationRelativeTo(null);
+		setVisible(true);
+		setResizable(false);
 	}
 	
 	public void addToButtonsActionListener(ActionListener actionListener) {
 		button1.addActionListener(actionListener);
 		button2.addActionListener(actionListener);
 		button3.addActionListener(actionListener);
-	}
-	
-	
-	public void helpWindowSet() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(640, 530);
-		setLocationRelativeTo(null);
-		setVisible(true);
-		setResizable(false);
 	}
 
 	@Override
@@ -63,6 +58,7 @@ public class HelpView extends JFrame implements Observer {
 		getContentPane().revalidate();
 		getContentPane().repaint();
 		mainPanel.setLayout(layout);
+		mainPanel.setBackground(Color.WHITE);
 		mainPanel.setPreferredSize(new Dimension(640, 480));
 		
 		// ウィンドタイトルの修正と紙芝居の差し替え
@@ -103,6 +99,7 @@ public class HelpView extends JFrame implements Observer {
 		buttonPanel.add(button2);
 		buttonPanel.add(button1);
 		buttonPanel.add(button3);
+		buttonPanel.setBackground(Color.WHITE);
 		getContentPane().add(buttonPanel, BorderLayout.SOUTH);
 	}
 
