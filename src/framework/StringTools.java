@@ -19,10 +19,8 @@ public class StringTools {
 		for (int i = 0; i < s.length(); i++) {
 			String s1 = s.substring(i, i + 1);
 			b += s1.getBytes().length;
-			if (b > n) {
-				break;
-			} else
-				sb.append(s1);
+			if (b > n) break;
+			else sb.append(s1);
 		}
 		return sb.toString();
 	}

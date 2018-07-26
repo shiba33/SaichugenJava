@@ -1,3 +1,4 @@
+package tester;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,7 +12,7 @@ import framework.Score;
 /**
  * 端末で手札指定してね？
  * 
- * @author 柴田航平 & 鈴木大河
+ * @author 鈴木大河
  * @see Player
  * @return カードの識別番号(0-51)
  */
