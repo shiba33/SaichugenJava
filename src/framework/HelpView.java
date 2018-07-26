@@ -29,10 +29,8 @@ public class HelpView extends JFrame implements Observer {
 	private GridBagLayout layout = new GridBagLayout();
 	private JPanel mainPanel = new JPanel();
 	private JPanel buttonPanel = new JPanel();
-	private JButton button1 = new JButton();
-	private JButton button2 = new JButton();
-	private JButton button3 = new JButton();
 	private JLabel img = new JLabel();
+	private JButton button1,button2,button3;
 	private ImageIcon helpImg;
 
 	public HelpView() {
@@ -41,6 +39,34 @@ public class HelpView extends JFrame implements Observer {
 		setLocationRelativeTo(null);
 		setVisible(true);
 		setResizable(false);
+		
+		mainPanel.setBackground(Color.WHITE);
+		mainPanel.setPreferredSize(new Dimension(640, 480));
+		
+		button1 = new JButton(new ImageIcon("./image/helpButton0.png"));
+		button1.setActionCommand("GoBack");
+		button1.setContentAreaFilled(false);
+		button1.setBorderPainted(false);
+		button1.setPreferredSize(new Dimension(200,40));
+		
+		button2 = new JButton(new ImageIcon("./image/helpButton1.png"));
+		button2.setActionCommand("Back");
+		button2.setContentAreaFilled(false);
+		button2.setBorderPainted(false);
+		button2.setPreferredSize(new Dimension(200,40));
+		
+		button3 = new JButton(new ImageIcon("./image/helpButton2.png"));
+		button3.setActionCommand("Next");
+		button3.setContentAreaFilled(false);
+		button3.setBorderPainted(false);
+		button3.setPreferredSize(new Dimension(200,40));
+		
+		buttonPanel.setPreferredSize(new Dimension(640, 50));
+		
+		buttonPanel.add(button2);
+		buttonPanel.add(button1);
+		buttonPanel.add(button3);
+		buttonPanel.setBackground(Color.WHITE);
 	}
 	
 	public void addToButtonsActionListener(ActionListener actionListener) {
@@ -58,8 +84,6 @@ public class HelpView extends JFrame implements Observer {
 		getContentPane().revalidate();
 		getContentPane().repaint();
 		mainPanel.setLayout(layout);
-		mainPanel.setBackground(Color.WHITE);
-		mainPanel.setPreferredSize(new Dimension(640, 480));
 		
 		// ウィンドタイトルの修正と紙芝居の差し替え
 		setTitle("最中限 -ヘルプ"+(help.getHelpStatus()+1)+"-");
@@ -67,24 +91,6 @@ public class HelpView extends JFrame implements Observer {
 		img.setIcon(helpImg);
 		img.setBounds(0, 0, 640, 480);
 		
-		// ヘルプのコントローラー(ボタン)の設定
-		button1.setText("メニューに戻る");
-		button1.setActionCommand("GoBack");
-		button1.setFont(new Font("MS　ゴシック", Font.PLAIN, 16));
-		button1.setPreferredSize(new Dimension(200,40));
-		
-		button2.setText("戻る");
-		button2.setActionCommand("Back");
-		button2.setFont(new Font("MS　ゴシック", Font.PLAIN, 16));
-		button2.setPreferredSize(new Dimension(200,40));
-		
-		button3.setText("進む");
-		button3.setActionCommand("Next");
-		button3.setFont(new Font("MS　ゴシック", Font.PLAIN, 16));
-		button3.setPreferredSize(new Dimension(200,40));
-		
-		buttonPanel.setPreferredSize(new Dimension(640, 50));
-
 		if(help.getHelpMaxPage()>=help.getHelpStatus()){
 			if(Objects.nonNull(arg)){
 				setVisible(false);
@@ -96,10 +102,6 @@ public class HelpView extends JFrame implements Observer {
 			
 		}
 		
-		buttonPanel.add(button2);
-		buttonPanel.add(button1);
-		buttonPanel.add(button3);
-		buttonPanel.setBackground(Color.WHITE);
 		getContentPane().add(buttonPanel, BorderLayout.SOUTH);
 	}
 
