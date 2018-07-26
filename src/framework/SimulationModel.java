@@ -191,6 +191,14 @@ public class SimulationModel extends Observable {
 	}
 
 	/**
+	 * 文字列を一定の長さ(10byte)にカットするメソッドです。
+	 * @param s 編集元の文字列
+	 * @return 編集後の文字列
+	 */
+	protected String cutPlayerName(String s) {
+		return StringTools.cutString(s,10);
+	}
+	/**
 	 * ターンで使用したカードの配列を取得するメソッドです。
 	 * @return 利用したカードの配列
 	 */

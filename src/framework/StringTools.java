@@ -1,5 +1,6 @@
 package framework;
 
+
 /**
  * 文字関係のツールを格納するクラスです。
  * @author 鈴木大河
