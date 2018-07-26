@@ -18,7 +18,10 @@ public class HelpModel extends Observable {
 	/**
 	 * 紙芝居の枚数を保持するフィールドです。
 	 */
-	private int helpMaxPage = 3;
+	final private int helpMaxPage = 3;
+	/**
+	 * 紙芝居の終了を管理するフィールドです。
+	 */
 	private boolean goBack = true;
 	
 	public HelpModel() {
@@ -92,21 +95,11 @@ public class HelpModel extends Observable {
 		return helpStatus;
 	}
 	/**
-	 * 紙芝居の最大枚数を指定するメソッドです
-	 * @param set 設定する最大ページ数
-	 */
-	protected void setHelpMaxPage(int set) {
-		helpMaxPage = set;
-	}
-	/**
-	 * 紙芝居の合計枚数を取得するメソッドです
-	 * @return 合計枚数
+	 * 紙芝居の枚数を取得するメソッドです
+	 * @return 枚数
 	 */
 	protected int getHelpMaxPage() {
 		return helpMaxPage;
-	}
-	protected boolean checkHelpPage(int nextHelpStatus) {
-		return helpMaxPage>=nextHelpStatus && nextHelpStatus>=0;
 	}
 
 }

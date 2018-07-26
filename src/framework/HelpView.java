@@ -44,6 +44,7 @@ public class HelpView extends JFrame implements Observer {
 		button3.addActionListener(actionListener);
 	}
 	
+	
 	public void helpWindowSet() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(640, 530);
@@ -96,7 +97,7 @@ public class HelpView extends JFrame implements Observer {
 			getContentPane().add(mainPanel, BorderLayout.CENTER);
 		}else {
 			
-		}		
+		}
 		
 		buttonPanel.add(button2);
 		buttonPanel.add(button1);
