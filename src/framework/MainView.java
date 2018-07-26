@@ -85,10 +85,7 @@ public class MainView extends JFrame implements Observer {
 				ImageIcon resizing_exit1 = ResizingImage.resizeIcon(exit1, screen_size_x / 3, screen_size_y / 14);
 				ImageIcon exit2 = new ImageIcon("./image/exit2.png");
 				ImageIcon resizing_exit2 = ResizingImage.resizeIcon(exit2, screen_size_x / 3, screen_size_y / 14);
-<<<<<<< HEAD
 				
-=======
->>>>>>> upstream/master
 				button1.setIcon(resizing_start);
 				button1.setRolloverIcon(resizing_start2);
 				button2.setIcon(resizing_sim1);
@@ -97,10 +94,7 @@ public class MainView extends JFrame implements Observer {
 				button3.setRolloverIcon(resizing_rule2);
 				button4.setIcon(resizing_exit1);
 				button4.setRolloverIcon(resizing_exit2);
-<<<<<<< HEAD
 				
-=======
->>>>>>> upstream/master
 				button1.setBounds(screen_size_x / 2 - (screen_size_x / 3 / 2), screen_size_y / 3 + screen_size_y / 14,
 						screen_size_x / 3, screen_size_y / 14);
 				button2.setBounds(screen_size_x / 2 - (screen_size_x / 3 / 2),
@@ -122,17 +116,11 @@ public class MainView extends JFrame implements Observer {
 				label4.setBounds(screen_size_x - 145,
 						screen_size_y - (100 + (screen_size_x / 128) + (screen_size_y / 72)), 120, 35);
 				label4.setFont(new Font("MS　ゴシック", Font.BOLD, screen_size_x / 128 + screen_size_y / 72));
-<<<<<<< HEAD
 				
 				combo1.setBounds(screen_size_x - 450, screen_size_y - 80, 120, 20);
 				combo2.setBounds(screen_size_x - 300, screen_size_y - 80, 120, 20);
 				combo3.setBounds(screen_size_x - 150, screen_size_y - 80, 120, 20);
 				
-=======
-				combo1.setBounds(screen_size_x - 450, screen_size_y - 80, 120, 20);
-				combo2.setBounds(screen_size_x - 300, screen_size_y - 80, 120, 20);
-				combo3.setBounds(screen_size_x - 150, screen_size_y - 80, 120, 20);
->>>>>>> upstream/master
 				ImageIcon backImg = new ImageIcon("./image/background.png");
 				ImageIcon resizing_back = ResizingImage.resizeIcon(backImg, screen_size_x, screen_size_y);
 				background.setIcon(resizing_back);
