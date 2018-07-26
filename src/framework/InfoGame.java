@@ -51,6 +51,13 @@ public class InfoGame {
 	}
 
 	/**
+	 * ゲームのステータスを取得するメソッドです。
+	 * @return ゲームステータス
+	 */
+	public int getGameStatus()  {
+		return gameStatus;
+	}
+	/**
 	 * ターン数を取得するメソッドです。
 	 * @return ターン数
 	 */
