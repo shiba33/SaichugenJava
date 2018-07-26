@@ -46,14 +46,6 @@ public class InfoGame {
 	 * ゲームのステータスを取得するメソッドです。
 	 * @return ゲームステータス
 	 */
-	public int getGameStatus() {
-		return gameStatus;
-	}
-
-	/**
-	 * ゲームのステータスを取得するメソッドです。
-	 * @return ゲームステータス
-	 */
 	public int getGameStatus()  {
 		return gameStatus;
 	}
