@@ -15,7 +15,7 @@ public class Main {
 				MainModel mm = new MainModel();
 				MainView mv = new MainView();
 				MainController mc = new MainController(mm, mv);
-
+				mv.addToButton1ActionListener((ActionListener) mc);
 				mv.addToButton2ActionListener((ActionListener) mc);
 				mm.addObserver(mv);
 			}

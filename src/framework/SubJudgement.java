@@ -1,11 +1,12 @@
 package framework;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 
 /**
  * ターン・ラウンドの勝敗を決定する抽象クラスの実装です。
- * 
+ *
  * @author 柴田航平
  * @see Judgement
  */
@@ -13,7 +14,7 @@ class SubJudgement extends Judgement {
 
 	/**
 	 * ターンの勝敗を決定する抽象メソッドの実装です。
-	 * 
+	 *
 	 * @param p1
 	 *            プレイヤー1の出すカード
 	 * @param p2
@@ -44,7 +45,7 @@ class SubJudgement extends Judgement {
 
 	/**
 	 * ラウンドの勝敗を決定する抽象メソッドの実装です。
-	 * 
+	 *
 	 * @param score
 	 *            プレイ成績
 	 */
@@ -55,7 +56,7 @@ class SubJudgement extends Judgement {
 
 	/**
 	 * 最終的な勝敗を決定する抽象メソッドの実装です。
-	 * 
+	 *
 	 * @param score
 	 *            プレイ成績
 	 */
@@ -66,7 +67,7 @@ class SubJudgement extends Judgement {
 
 	/**
 	 * ラウンドや最終的な成績を比較し、勝者をリストとして取得する。
-	 * 
+	 *
 	 * @param score
 	 *            プレイヤー成績
 	 * @param str
@@ -113,13 +114,13 @@ class SubJudgement extends Judgement {
 
 		setTurnRanking(getRankingList(p1, p2, p3));
 	}
-	
+
 	@Override
 	protected void roundRanking(Score score) {
 		int p1 = score.getRoundScore(0);
 		int p2 = score.getRoundScore(1);
 		int p3 = score.getRoundScore(2);
-		
+
 		setRoundRanking(getRankingList(p1, p2, p3));
 	}
 
@@ -128,52 +129,108 @@ class SubJudgement extends Judgement {
 		int p1 = score.getFinalScore(0);
 		int p2 = score.getFinalScore(1);
 		int p3 = score.getFinalScore(2);
-		
-		setRoundRanking(getRankingList(p1, p2, p3));
+
+		setFinalRanking(getRankingList(p1, p2, p3));
 	}
-	
+
 	protected ArrayList<Integer> getRankingList(int p1, int p2, int p3) {
 		ArrayList<Integer> rank = new ArrayList<Integer>();
+		// 相対誤差
+		double ave = (p1 + p2 + p3) / 3;
+		double saWith1 = Math.abs(ave - p1);
+		double saWith2 = Math.abs(ave - p2);
+		double saWith3 = Math.abs(ave - p3);
+		// 3つの要素をリストに詰める
+		rank.addAll(Arrays.asList(0, 0, 0));
+
 		if ((p1 == p2) && (p2 == p3)) {
-			rank.add(1);
-			rank.add(1);
-			rank.add(1);
+			rank.set(0, 1);
+			rank.set(1, 1);
+			rank.set(2, 1);
 		} else if (p1 == p2) {
-			rank.add(1);
-			rank.add(1);
-			rank.add(3);
+			rank.set(0, 1);
+			rank.set(1, 1);
+			rank.set(2, 3);
 		} else if (p1 == p3) {
-			rank.add(1);
-			rank.add(3);
-			rank.add(1);
-		}else if(p2 == p3) {
-			rank.add(3);
-			rank.add(1);
-			rank.add(1);
-		}else if((p1 < p2) && (p2 < p3)) {
-			rank.add(2);
-			rank.add(1);
-			rank.add(2);
-		}else if((p1 < p3) && (p3 < p2)) {
-			rank.add(2);
-			rank.add(2);
-			rank.add(1);
-		}else if((p2 < p1) && (p1 < p3)) {
-			rank.add(1);
-			rank.add(2);
-			rank.add(2);
-		}else if((p3 < p1) && (p1 < p2)) {
-			rank.add(1);
-			rank.add(2);
-			rank.add(2);
-		}else if((p2 < p3) && (p3 < p1)) {
-			rank.add(2);
-			rank.add(2);
-			rank.add(1);
-		}else {
-			rank.add(2);
-			rank.add(1);
-			rank.add(2);
+			rank.set(0, 1);
+			rank.set(1, 3);
+			rank.set(2, 1);
+		} else if (p2 == p3) {
+			rank.set(0, 3);
+			rank.set(1, 1);
+			rank.add(2, 1);
+		} else if ((p1 < p2) && (p2 < p3)) {
+			rank.set(1, 1);
+			if (saWith1 < saWith3) {
+				rank.set(0, 2);
+				rank.set(2, 3);
+			} else if (saWith1 > saWith3) {
+				rank.set(0, 3);
+				rank.set(2, 2);
+			} else {
+				rank.set(0, 2);
+				rank.set(2, 2);
+			}
+		} else if ((p1 < p3) && (p3 < p2)) {
+			rank.set(2, 1);
+			if (saWith1 < saWith2) {
+				rank.set(0, 2);
+				rank.set(1, 3);
+			} else if (saWith1 > saWith2) {
+				rank.set(0, 3);
+				rank.set(1, 2);
+			} else {
+				rank.set(0, 2);
+				rank.set(1, 2);
+			}
+		} else if ((p2 < p1) && (p1 < p3)) {
+			rank.set(0, 1);
+			if (saWith2 < saWith3) {
+				rank.set(1, 2);
+				rank.set(2, 3);
+			} else if (saWith2 > saWith3) {
+				rank.set(1, 3);
+				rank.set(2, 2);
+			} else {
+				rank.set(1, 2);
+				rank.set(2, 2);
+			}
+		} else if ((p3 < p1) && (p1 < p2)) {
+			rank.set(0, 1);
+			if (saWith3 < saWith2) {
+				rank.set(1, 3);
+				rank.set(2, 2);
+			} else if (saWith3 > saWith2) {
+				rank.set(1, 2);
+				rank.set(2, 3);
+			} else {
+				rank.set(1, 2);
+				rank.set(2, 2);
+			}
+		} else if ((p2 < p3) && (p3 < p1)) {
+			rank.set(2, 1);
+			if (saWith2 < saWith1) {
+				rank.set(0, 3);
+				rank.set(1, 2);
+			} else if (saWith2 > saWith1) {
+				rank.set(0, 2);
+				rank.set(1, 3);
+			} else {
+				rank.set(0, 2);
+				rank.set(1, 2);
+			}
+		} else {
+			rank.set(1, 1);
+			if (saWith1 < saWith3) {
+				rank.set(0, 2);
+				rank.set(2, 3);
+			} else if (saWith1 > saWith3) {
+				rank.set(0, 3);
+				rank.set(2, 2);
+			} else {
+				rank.set(0, 2);
+				rank.set(2, 2);
+			}
 		}
 
 		return rank;
