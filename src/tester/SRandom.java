@@ -1,26 +1,26 @@
+package tester;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+import framework.ValueUtility;
 import framework.InfoGame;
 import framework.Player;
 import framework.Score;
 
 /**
- * 端末で手札指定してね？
+ * プレイヤーの戦略を表すクラスです。
+ * 何も考えずランダムなカードを出します。
  * 
- * @author 柴田航平 & 鈴木大河
+ * @author 鈴木大河
  * @see Player
  * @return カードの識別番号(0-51)
  */
-public class Custom extends Player {
+public class SRandom extends Player {
 	/**
 	 * プレイヤー名を指定するコンストラクタです。
 	 */
-	public Custom() {
-		super("Custom");
+	public SRandom() {
+		super("SRandom");
 	}
 
 	/**
@@ -31,15 +31,6 @@ public class Custom extends Player {
 	 */
 	@Override
 	public int strategy(ArrayList<Integer> hands, Score score, int id, InfoGame info) {
-		String str=null;
-		System.out.println("てふだ:"+hands);
-		try{
-			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-			System.out.print("num[0-51]:");
-			str = br.readLine();
-		}catch(IOException e){
-			System.out.println("Exception :" + e);
-		}
-		return Integer.valueOf(str) ;
+		return (int)Math.random()*51;
 	}
 }

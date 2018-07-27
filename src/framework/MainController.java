@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 /**
  * メニューのControllerに関わるクラスです。
  *
- * @author 柴田航平 & 古田亮汰郎
+ * @author 柴田航平 & 古田亮汰郎 (+鈴木大河)
  * @see ActionListener
  */
 public class MainController implements ActionListener {
@@ -18,6 +18,9 @@ public class MainController implements ActionListener {
 	private PlayGameModel pm;
 	private PlayGameView pv;
 	private PlayGameController pc;
+	private HelpModel hm;
+	private HelpView hv;
+	private HelpController hc;
 
 	public MainController(MainModel model, MainView view) {
 		mm = model;
@@ -79,6 +82,15 @@ public class MainController implements ActionListener {
 			sm.simulation();
 
 		} else if (e.getActionCommand().equals("Rule")) {
+			hm = new HelpModel();
+			hv = new HelpView();
+			hc = new HelpController(mm,hm);
+			
+			hv.addToButtonsActionListener((ActionListener) hc);
+			hm.addObserver(hv);
+			
+			mm.setButton3();
+			hm.help();
 		}
 
 	}
