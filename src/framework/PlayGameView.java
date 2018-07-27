@@ -53,6 +53,7 @@ public class PlayGameView extends JFrame implements Observer {
 	static String str = null;
 	static boolean lock1 = false;
 	public static boolean lock2 = false;
+	public static boolean lock3 = true;
 
 	public void addToButton1ActionListener(ActionListener actionListener) {
 		button1.addActionListener(actionListener);
@@ -306,6 +307,7 @@ public class PlayGameView extends JFrame implements Observer {
 			/*終了*/
 
 			for (int i = Shands.size() - 1; i >= 0; i--) {
+				cardsHands[i].setEnabled(true);
 				cardsHands[i].setText(null);
 				cardsHands[i].setContentAreaFilled(false);
 				cardsHands[i].setBorderPainted(false);
@@ -319,29 +321,32 @@ public class PlayGameView extends JFrame implements Observer {
 			}
 			for (int i = 16; i >= Shands.size(); i--) {
 				cardsHands[i].setIcon(null);
+				cardsHands[i].setEnabled(false);
 			}
 			cardsHands[0].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					lock1 = true;
-
-					cardsCenter.setIcon(convert_Card[Shands.get(0)]);
-					str = String.valueOf(Shands.get(0));
-					for (int i = 16; i >= 0; i--) {
-						if (i == 0) {
-							cardsHands[0].setBounds(
-									(int) (simulation_size_x / 2 + (simulation_size_x / 9.6) / 2)
-											+ 0 * -(simulation_size_x / 64),
-									(int) (simulation_size_y - (simulation_size_y / 4.8) - (simulation_size_y / 6.2)),
-									(int) (simulation_size_x / 9.6),
-									(int) (simulation_size_y / 3.6));
-						} else {
-							cardsHands[i].setBounds(
-									(int) (simulation_size_x / 2 + (simulation_size_x / 9.6) / 2)
-											+ i * -(simulation_size_x / 64),
-									(int) (simulation_size_y - (simulation_size_y / 4.8) - 60
-											+ (simulation_size_x / -32)),
-									(int) (simulation_size_x / 9.6),
-									(int) (simulation_size_y / 3.6));
+					if (lock3) {
+						lock1 = true;
+						cardsCenter.setIcon(convert_Card[Shands.get(0)]);
+						str = String.valueOf(Shands.get(0));
+						for (int i = 16; i >= 0; i--) {
+							if (i == 0) {
+								cardsHands[0].setBounds(
+										(int) (simulation_size_x / 2 + (simulation_size_x / 9.6) / 2)
+												+ 0 * -(simulation_size_x / 64),
+										(int) (simulation_size_y - (simulation_size_y / 4.8)
+												- (simulation_size_y / 6.2)),
+										(int) (simulation_size_x / 9.6),
+										(int) (simulation_size_y / 3.6));
+							} else {
+								cardsHands[i].setBounds(
+										(int) (simulation_size_x / 2 + (simulation_size_x / 9.6) / 2)
+												+ i * -(simulation_size_x / 64),
+										(int) (simulation_size_y - (simulation_size_y / 4.8) - 60
+												+ (simulation_size_x / -32)),
+										(int) (simulation_size_x / 9.6),
+										(int) (simulation_size_y / 3.6));
+							}
 						}
 					}
 				}
@@ -349,208 +354,229 @@ public class PlayGameView extends JFrame implements Observer {
 
 			cardsHands[1].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					lock1 = true;
-
-					cardsCenter.setIcon(convert_Card[Shands.get(1)]);
-					str = String.valueOf(Shands.get(1));
-					for (int i = 16; i >= 0; i--) {
-						if (i == 1) {
-							cardsHands[1].setBounds(
-									(int) (simulation_size_x / 2 + (simulation_size_x / 9.6) / 2)
-											+ 1 * -(simulation_size_x / 64),
-									(int) (simulation_size_y - (simulation_size_y / 4.8) - (simulation_size_y / 6.2)),
-									(int) (simulation_size_x / 9.6),
-									(int) (simulation_size_y / 3.6));
-						} else {
-							cardsHands[i].setBounds(
-									(int) (simulation_size_x / 2 + (simulation_size_x / 9.6) / 2)
-											+ i * -(simulation_size_x / 64),
-									(int) (simulation_size_y - (simulation_size_y / 4.8) - 60
-											+ (simulation_size_x / -32)),
-									(int) (simulation_size_x / 9.6),
-									(int) (simulation_size_y / 3.6));
+					if (lock3) {
+						lock1 = true;
+						cardsCenter.setIcon(convert_Card[Shands.get(1)]);
+						str = String.valueOf(Shands.get(1));
+						for (int i = 16; i >= 0; i--) {
+							if (i == 1) {
+								cardsHands[1].setBounds(
+										(int) (simulation_size_x / 2 + (simulation_size_x / 9.6) / 2)
+												+ 1 * -(simulation_size_x / 64),
+										(int) (simulation_size_y - (simulation_size_y / 4.8)
+												- (simulation_size_y / 6.2)),
+										(int) (simulation_size_x / 9.6),
+										(int) (simulation_size_y / 3.6));
+							} else {
+								cardsHands[i].setBounds(
+										(int) (simulation_size_x / 2 + (simulation_size_x / 9.6) / 2)
+												+ i * -(simulation_size_x / 64),
+										(int) (simulation_size_y - (simulation_size_y / 4.8) - 60
+												+ (simulation_size_x / -32)),
+										(int) (simulation_size_x / 9.6),
+										(int) (simulation_size_y / 3.6));
+							}
 						}
 					}
 				}
 			});
 			cardsHands[2].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					lock1 = true;
+					if (lock3) {
+						lock1 = true;
 
-					cardsCenter.setIcon(convert_Card[Shands.get(2)]);
-					str = String.valueOf(Shands.get(2));
-					for (int i = 16; i >= 0; i--) {
-						if (i == 2) {
-							cardsHands[2].setBounds(
-									(int) (simulation_size_x / 2 + (simulation_size_x / 9.6) / 2)
-											+ 2 * -(simulation_size_x / 64),
-									(int) (simulation_size_y - (simulation_size_y / 4.8) - (simulation_size_y / 6.2)),
-									(int) (simulation_size_x / 9.6),
-									(int) (simulation_size_y / 3.6));
-						} else {
-							cardsHands[i].setBounds(
-									(int) (simulation_size_x / 2 + (simulation_size_x / 9.6) / 2)
-											+ i * -(simulation_size_x / 64),
-									(int) (simulation_size_y - (simulation_size_y / 4.8) - 60
-											+ (simulation_size_x / -32)),
-									(int) (simulation_size_x / 9.6),
-									(int) (simulation_size_y / 3.6));
+						cardsCenter.setIcon(convert_Card[Shands.get(2)]);
+						str = String.valueOf(Shands.get(2));
+						for (int i = 16; i >= 0; i--) {
+							if (i == 2) {
+								cardsHands[2].setBounds(
+										(int) (simulation_size_x / 2 + (simulation_size_x / 9.6) / 2)
+												+ 2 * -(simulation_size_x / 64),
+										(int) (simulation_size_y - (simulation_size_y / 4.8)
+												- (simulation_size_y / 6.2)),
+										(int) (simulation_size_x / 9.6),
+										(int) (simulation_size_y / 3.6));
+							} else {
+								cardsHands[i].setBounds(
+										(int) (simulation_size_x / 2 + (simulation_size_x / 9.6) / 2)
+												+ i * -(simulation_size_x / 64),
+										(int) (simulation_size_y - (simulation_size_y / 4.8) - 60
+												+ (simulation_size_x / -32)),
+										(int) (simulation_size_x / 9.6),
+										(int) (simulation_size_y / 3.6));
+							}
 						}
 					}
 				}
 			});
 			cardsHands[3].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					lock1 = true;
+					if (lock3) {
+						lock1 = true;
 
-					cardsCenter.setIcon(convert_Card[Shands.get(3)]);
-					str = String.valueOf(Shands.get(3));
-					for (int i = 16; i >= 0; i--) {
-						if (i == 3) {
-							cardsHands[3].setBounds(
-									(int) (simulation_size_x / 2 + (simulation_size_x / 9.6) / 2)
-											+ 3 * -(simulation_size_x / 64),
-									(int) (simulation_size_y - (simulation_size_y / 4.8) - (simulation_size_y / 6.2)),
-									(int) (simulation_size_x / 9.6),
-									(int) (simulation_size_y / 3.6));
-						} else {
-							cardsHands[i].setBounds(
-									(int) (simulation_size_x / 2 + (simulation_size_x / 9.6) / 2)
-											+ i * -(simulation_size_x / 64),
-									(int) (simulation_size_y - (simulation_size_y / 4.8) - 60
-											+ (simulation_size_x / -32)),
-									(int) (simulation_size_x / 9.6),
-									(int) (simulation_size_y / 3.6));
+						cardsCenter.setIcon(convert_Card[Shands.get(3)]);
+						str = String.valueOf(Shands.get(3));
+						for (int i = 16; i >= 0; i--) {
+							if (i == 3) {
+								cardsHands[3].setBounds(
+										(int) (simulation_size_x / 2 + (simulation_size_x / 9.6) / 2)
+												+ 3 * -(simulation_size_x / 64),
+										(int) (simulation_size_y - (simulation_size_y / 4.8)
+												- (simulation_size_y / 6.2)),
+										(int) (simulation_size_x / 9.6),
+										(int) (simulation_size_y / 3.6));
+							} else {
+								cardsHands[i].setBounds(
+										(int) (simulation_size_x / 2 + (simulation_size_x / 9.6) / 2)
+												+ i * -(simulation_size_x / 64),
+										(int) (simulation_size_y - (simulation_size_y / 4.8) - 60
+												+ (simulation_size_x / -32)),
+										(int) (simulation_size_x / 9.6),
+										(int) (simulation_size_y / 3.6));
+							}
 						}
 					}
 				}
 			});
 			cardsHands[4].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					lock1 = true;
-
-					cardsCenter.setIcon(convert_Card[Shands.get(4)]);
-					str = String.valueOf(Shands.get(4));
-					for (int i = 16; i >= 0; i--) {
-						if (i == 4) {
-							cardsHands[4].setBounds(
-									(int) (simulation_size_x / 2 + (simulation_size_x / 9.6) / 2)
-											+ 4 * -(simulation_size_x / 64),
-									(int) (simulation_size_y - (simulation_size_y / 4.8) - (simulation_size_y / 6.2)),
-									(int) (simulation_size_x / 9.6),
-									(int) (simulation_size_y / 3.6));
-						} else {
-							cardsHands[i].setBounds(
-									(int) (simulation_size_x / 2 + (simulation_size_x / 9.6) / 2)
-											+ i * -(simulation_size_x / 64),
-									(int) (simulation_size_y - (simulation_size_y / 4.8) - 60
-											+ (simulation_size_x / -32)),
-									(int) (simulation_size_x / 9.6),
-									(int) (simulation_size_y / 3.6));
+					if (lock3) {
+						lock1 = true;
+						cardsCenter.setIcon(convert_Card[Shands.get(4)]);
+						str = String.valueOf(Shands.get(4));
+						for (int i = 16; i >= 0; i--) {
+							if (i == 4) {
+								cardsHands[4].setBounds(
+										(int) (simulation_size_x / 2 + (simulation_size_x / 9.6) / 2)
+												+ 4 * -(simulation_size_x / 64),
+										(int) (simulation_size_y - (simulation_size_y / 4.8)
+												- (simulation_size_y / 6.2)),
+										(int) (simulation_size_x / 9.6),
+										(int) (simulation_size_y / 3.6));
+							} else {
+								cardsHands[i].setBounds(
+										(int) (simulation_size_x / 2 + (simulation_size_x / 9.6) / 2)
+												+ i * -(simulation_size_x / 64),
+										(int) (simulation_size_y - (simulation_size_y / 4.8) - 60
+												+ (simulation_size_x / -32)),
+										(int) (simulation_size_x / 9.6),
+										(int) (simulation_size_y / 3.6));
+							}
 						}
 					}
 				}
 			});
 			cardsHands[5].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					lock1 = true;
-
-					cardsCenter.setIcon(convert_Card[Shands.get(5)]);
-					str = String.valueOf(Shands.get(5));
-					for (int i = 16; i >= 0; i--) {
-						if (i == 5) {
-							cardsHands[5].setBounds(
-									(int) (simulation_size_x / 2 + (simulation_size_x / 9.6) / 2)
-											+ 5 * -(simulation_size_x / 64),
-									(int) (simulation_size_y - (simulation_size_y / 4.8) - (simulation_size_y / 6.2)),
-									(int) (simulation_size_x / 9.6),
-									(int) (simulation_size_y / 3.6));
-						} else {
-							cardsHands[i].setBounds(
-									(int) (simulation_size_x / 2 + (simulation_size_x / 9.6) / 2)
-											+ i * -(simulation_size_x / 64),
-									(int) (simulation_size_y - (simulation_size_y / 4.8) - 60
-											+ (simulation_size_x / -32)),
-									(int) (simulation_size_x / 9.6),
-									(int) (simulation_size_y / 3.6));
+					if (lock3) {
+						lock1 = true;
+						cardsCenter.setIcon(convert_Card[Shands.get(5)]);
+						str = String.valueOf(Shands.get(5));
+						for (int i = 16; i >= 0; i--) {
+							if (i == 5) {
+								cardsHands[5].setBounds(
+										(int) (simulation_size_x / 2 + (simulation_size_x / 9.6) / 2)
+												+ 5 * -(simulation_size_x / 64),
+										(int) (simulation_size_y - (simulation_size_y / 4.8)
+												- (simulation_size_y / 6.2)),
+										(int) (simulation_size_x / 9.6),
+										(int) (simulation_size_y / 3.6));
+							} else {
+								cardsHands[i].setBounds(
+										(int) (simulation_size_x / 2 + (simulation_size_x / 9.6) / 2)
+												+ i * -(simulation_size_x / 64),
+										(int) (simulation_size_y - (simulation_size_y / 4.8) - 60
+												+ (simulation_size_x / -32)),
+										(int) (simulation_size_x / 9.6),
+										(int) (simulation_size_y / 3.6));
+							}
 						}
 					}
 				}
 			});
 			cardsHands[6].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					lock1 = true;
+					if (lock3) {
+						lock1 = true;
 
-					cardsCenter.setIcon(convert_Card[Shands.get(6)]);
-					str = String.valueOf(Shands.get(6));
-					for (int i = 16; i >= 0; i--) {
-						if (i == 6) {
-							cardsHands[6].setBounds(
-									(int) (simulation_size_x / 2 + (simulation_size_x / 9.6) / 2)
-											+ 6 * -(simulation_size_x / 64),
-									(int) (simulation_size_y - (simulation_size_y / 4.8) - (simulation_size_y / 6.2)),
-									(int) (simulation_size_x / 9.6),
-									(int) (simulation_size_y / 3.6));
-						} else {
-							cardsHands[i].setBounds(
-									(int) (simulation_size_x / 2 + (simulation_size_x / 9.6) / 2)
-											+ i * -(simulation_size_x / 64),
-									(int) (simulation_size_y - (simulation_size_y / 4.8) - 60
-											+ (simulation_size_x / -32)),
-									(int) (simulation_size_x / 9.6),
-									(int) (simulation_size_y / 3.6));
+						cardsCenter.setIcon(convert_Card[Shands.get(6)]);
+						str = String.valueOf(Shands.get(6));
+						for (int i = 16; i >= 0; i--) {
+							if (i == 6) {
+								cardsHands[6].setBounds(
+										(int) (simulation_size_x / 2 + (simulation_size_x / 9.6) / 2)
+												+ 6 * -(simulation_size_x / 64),
+										(int) (simulation_size_y - (simulation_size_y / 4.8)
+												- (simulation_size_y / 6.2)),
+										(int) (simulation_size_x / 9.6),
+										(int) (simulation_size_y / 3.6));
+							} else {
+								cardsHands[i].setBounds(
+										(int) (simulation_size_x / 2 + (simulation_size_x / 9.6) / 2)
+												+ i * -(simulation_size_x / 64),
+										(int) (simulation_size_y - (simulation_size_y / 4.8) - 60
+												+ (simulation_size_x / -32)),
+										(int) (simulation_size_x / 9.6),
+										(int) (simulation_size_y / 3.6));
+							}
 						}
 					}
 				}
 			});
 			cardsHands[7].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					lock1 = true;
+					if (lock3) {
+						lock1 = true;
 
-					cardsCenter.setIcon(convert_Card[Shands.get(7)]);
-					str = String.valueOf(Shands.get(7));
-					for (int i = 16; i >= 0; i--) {
-						if (i == 7) {
-							cardsHands[7].setBounds(
-									(int) (simulation_size_x / 2 + (simulation_size_x / 9.6) / 2)
-											+ 7 * -(simulation_size_x / 64),
-									(int) (simulation_size_y - (simulation_size_y / 4.8) - (simulation_size_y / 6.2)),
-									(int) (simulation_size_x / 9.6),
-									(int) (simulation_size_y / 3.6));
-						} else {
-							cardsHands[i].setBounds(
-									(int) (simulation_size_x / 2 + (simulation_size_x / 9.6) / 2)
-											+ i * -(simulation_size_x / 64),
-									(int) (simulation_size_y - (simulation_size_y / 4.8) - 60
-											+ (simulation_size_x / -32)),
-									(int) (simulation_size_x / 9.6),
-									(int) (simulation_size_y / 3.6));
+						cardsCenter.setIcon(convert_Card[Shands.get(7)]);
+						str = String.valueOf(Shands.get(7));
+						for (int i = 16; i >= 0; i--) {
+							if (i == 7) {
+								cardsHands[7].setBounds(
+										(int) (simulation_size_x / 2 + (simulation_size_x / 9.6) / 2)
+												+ 7 * -(simulation_size_x / 64),
+										(int) (simulation_size_y - (simulation_size_y / 4.8)
+												- (simulation_size_y / 6.2)),
+										(int) (simulation_size_x / 9.6),
+										(int) (simulation_size_y / 3.6));
+							} else {
+								cardsHands[i].setBounds(
+										(int) (simulation_size_x / 2 + (simulation_size_x / 9.6) / 2)
+												+ i * -(simulation_size_x / 64),
+										(int) (simulation_size_y - (simulation_size_y / 4.8) - 60
+												+ (simulation_size_x / -32)),
+										(int) (simulation_size_x / 9.6),
+										(int) (simulation_size_y / 3.6));
+							}
 						}
 					}
 				}
 			});
 			cardsHands[8].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					lock1 = true;
+					if (lock3) {
+						lock1 = true;
 
-					cardsCenter.setIcon(convert_Card[Shands.get(8)]);
-					str = String.valueOf(Shands.get(8));
-					for (int i = 16; i >= 0; i--) {
-						if (i == 8) {
-							cardsHands[8].setBounds(
-									(int) (simulation_size_x / 2 + (simulation_size_x / 9.6) / 2)
-											+ 8 * -(simulation_size_x / 64),
-									(int) (simulation_size_y - (simulation_size_y / 4.8) - (simulation_size_y / 6.2)),
-									(int) (simulation_size_x / 9.6),
-									(int) (simulation_size_y / 3.6));
-						} else {
-							cardsHands[i].setBounds(
-									(int) (simulation_size_x / 2 + (simulation_size_x / 9.6) / 2)
-											+ i * -(simulation_size_x / 64),
-									(int) (simulation_size_y - (simulation_size_y / 4.8) - 60
-											+ (simulation_size_x / -32)),
-									(int) (simulation_size_x / 9.6),
-									(int) (simulation_size_y / 3.6));
+						cardsCenter.setIcon(convert_Card[Shands.get(8)]);
+						str = String.valueOf(Shands.get(8));
+						for (int i = 16; i >= 0; i--) {
+							if (i == 8) {
+								cardsHands[8].setBounds(
+										(int) (simulation_size_x / 2 + (simulation_size_x / 9.6) / 2)
+												+ 8 * -(simulation_size_x / 64),
+										(int) (simulation_size_y - (simulation_size_y / 4.8)
+												- (simulation_size_y / 6.2)),
+										(int) (simulation_size_x / 9.6),
+										(int) (simulation_size_y / 3.6));
+							} else {
+								cardsHands[i].setBounds(
+										(int) (simulation_size_x / 2 + (simulation_size_x / 9.6) / 2)
+												+ i * -(simulation_size_x / 64),
+										(int) (simulation_size_y - (simulation_size_y / 4.8) - 60
+												+ (simulation_size_x / -32)),
+										(int) (simulation_size_x / 9.6),
+										(int) (simulation_size_y / 3.6));
+							}
 						}
 					}
 				}
@@ -558,26 +584,29 @@ public class PlayGameView extends JFrame implements Observer {
 
 			cardsHands[9].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					lock1 = true;
+					if (lock3) {
+						lock1 = true;
 
-					cardsCenter.setIcon(convert_Card[Shands.get(9)]);
-					str = String.valueOf(Shands.get(9));
-					for (int i = 16; i >= 0; i--) {
-						if (i == 9) {
-							cardsHands[9].setBounds(
-									(int) (simulation_size_x / 2 + (simulation_size_x / 9.6) / 2)
-											+ 9 * -(simulation_size_x / 64),
-									(int) (simulation_size_y - (simulation_size_y / 4.8) - (simulation_size_y / 6.2)),
-									(int) (simulation_size_x / 9.6),
-									(int) (simulation_size_y / 3.6));
-						} else {
-							cardsHands[i].setBounds(
-									(int) (simulation_size_x / 2 + (simulation_size_x / 9.6) / 2)
-											+ i * -(simulation_size_x / 64),
-									(int) (simulation_size_y - (simulation_size_y / 4.8) - 60
-											+ (simulation_size_x / -32)),
-									(int) (simulation_size_x / 9.6),
-									(int) (simulation_size_y / 3.6));
+						cardsCenter.setIcon(convert_Card[Shands.get(9)]);
+						str = String.valueOf(Shands.get(9));
+						for (int i = 16; i >= 0; i--) {
+							if (i == 9) {
+								cardsHands[9].setBounds(
+										(int) (simulation_size_x / 2 + (simulation_size_x / 9.6) / 2)
+												+ 9 * -(simulation_size_x / 64),
+										(int) (simulation_size_y - (simulation_size_y / 4.8)
+												- (simulation_size_y / 6.2)),
+										(int) (simulation_size_x / 9.6),
+										(int) (simulation_size_y / 3.6));
+							} else {
+								cardsHands[i].setBounds(
+										(int) (simulation_size_x / 2 + (simulation_size_x / 9.6) / 2)
+												+ i * -(simulation_size_x / 64),
+										(int) (simulation_size_y - (simulation_size_y / 4.8) - 60
+												+ (simulation_size_x / -32)),
+										(int) (simulation_size_x / 9.6),
+										(int) (simulation_size_y / 3.6));
+							}
 						}
 					}
 				}
@@ -585,26 +614,29 @@ public class PlayGameView extends JFrame implements Observer {
 
 			cardsHands[10].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					lock1 = true;
+					if (lock3) {
+						lock1 = true;
 
-					cardsCenter.setIcon(convert_Card[Shands.get(10)]);
-					str = String.valueOf(Shands.get(10));
-					for (int i = 16; i >= 0; i--) {
-						if (i == 10) {
-							cardsHands[10].setBounds(
-									(int) (simulation_size_x / 2 + (simulation_size_x / 9.6) / 2)
-											+ 10 * -(simulation_size_x / 64),
-									(int) (simulation_size_y - (simulation_size_y / 4.8) - (simulation_size_y / 6.2)),
-									(int) (simulation_size_x / 9.6),
-									(int) (simulation_size_y / 3.6));
-						} else {
-							cardsHands[i].setBounds(
-									(int) (simulation_size_x / 2 + (simulation_size_x / 9.6) / 2)
-											+ i * -(simulation_size_x / 64),
-									(int) (simulation_size_y - (simulation_size_y / 4.8) - 60
-											+ (simulation_size_x / -32)),
-									(int) (simulation_size_x / 9.6),
-									(int) (simulation_size_y / 3.6));
+						cardsCenter.setIcon(convert_Card[Shands.get(10)]);
+						str = String.valueOf(Shands.get(10));
+						for (int i = 16; i >= 0; i--) {
+							if (i == 10) {
+								cardsHands[10].setBounds(
+										(int) (simulation_size_x / 2 + (simulation_size_x / 9.6) / 2)
+												+ 10 * -(simulation_size_x / 64),
+										(int) (simulation_size_y - (simulation_size_y / 4.8)
+												- (simulation_size_y / 6.2)),
+										(int) (simulation_size_x / 9.6),
+										(int) (simulation_size_y / 3.6));
+							} else {
+								cardsHands[i].setBounds(
+										(int) (simulation_size_x / 2 + (simulation_size_x / 9.6) / 2)
+												+ i * -(simulation_size_x / 64),
+										(int) (simulation_size_y - (simulation_size_y / 4.8) - 60
+												+ (simulation_size_x / -32)),
+										(int) (simulation_size_x / 9.6),
+										(int) (simulation_size_y / 3.6));
+							}
 						}
 					}
 				}
@@ -612,26 +644,29 @@ public class PlayGameView extends JFrame implements Observer {
 
 			cardsHands[11].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					lock1 = true;
+					if (lock3) {
+						lock1 = true;
 
-					cardsCenter.setIcon(convert_Card[Shands.get(11)]);
-					str = String.valueOf(Shands.get(11));
-					for (int i = 16; i >= 0; i--) {
-						if (i == 11) {
-							cardsHands[11].setBounds(
-									(int) (simulation_size_x / 2 + (simulation_size_x / 9.6) / 2)
-											+ 11 * -(simulation_size_x / 64),
-									(int) (simulation_size_y - (simulation_size_y / 4.8) - (simulation_size_y / 6.2)),
-									(int) (simulation_size_x / 9.6),
-									(int) (simulation_size_y / 3.6));
-						} else {
-							cardsHands[i].setBounds(
-									(int) (simulation_size_x / 2 + (simulation_size_x / 9.6) / 2)
-											+ i * -(simulation_size_x / 64),
-									(int) (simulation_size_y - (simulation_size_y / 4.8) - 60
-											+ (simulation_size_x / -32)),
-									(int) (simulation_size_x / 9.6),
-									(int) (simulation_size_y / 3.6));
+						cardsCenter.setIcon(convert_Card[Shands.get(11)]);
+						str = String.valueOf(Shands.get(11));
+						for (int i = 16; i >= 0; i--) {
+							if (i == 11) {
+								cardsHands[11].setBounds(
+										(int) (simulation_size_x / 2 + (simulation_size_x / 9.6) / 2)
+												+ 11 * -(simulation_size_x / 64),
+										(int) (simulation_size_y - (simulation_size_y / 4.8)
+												- (simulation_size_y / 6.2)),
+										(int) (simulation_size_x / 9.6),
+										(int) (simulation_size_y / 3.6));
+							} else {
+								cardsHands[i].setBounds(
+										(int) (simulation_size_x / 2 + (simulation_size_x / 9.6) / 2)
+												+ i * -(simulation_size_x / 64),
+										(int) (simulation_size_y - (simulation_size_y / 4.8) - 60
+												+ (simulation_size_x / -32)),
+										(int) (simulation_size_x / 9.6),
+										(int) (simulation_size_y / 3.6));
+							}
 						}
 					}
 				}
@@ -639,26 +674,29 @@ public class PlayGameView extends JFrame implements Observer {
 
 			cardsHands[12].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					lock1 = true;
+					if (lock3) {
+						lock1 = true;
 
-					cardsCenter.setIcon(convert_Card[Shands.get(12)]);
-					str = String.valueOf(Shands.get(12));
-					for (int i = 16; i >= 0; i--) {
-						if (i == 12) {
-							cardsHands[12].setBounds(
-									(int) (simulation_size_x / 2 + (simulation_size_x / 9.6) / 2)
-											+ 12 * -(simulation_size_x / 64),
-									(int) (simulation_size_y - (simulation_size_y / 4.8) - (simulation_size_y / 6.2)),
-									(int) (simulation_size_x / 9.6),
-									(int) (simulation_size_y / 3.6));
-						} else {
-							cardsHands[i].setBounds(
-									(int) (simulation_size_x / 2 + (simulation_size_x / 9.6) / 2)
-											+ i * -(simulation_size_x / 64),
-									(int) (simulation_size_y - (simulation_size_y / 4.8) - 60
-											+ (simulation_size_x / -32)),
-									(int) (simulation_size_x / 9.6),
-									(int) (simulation_size_y / 3.6));
+						cardsCenter.setIcon(convert_Card[Shands.get(12)]);
+						str = String.valueOf(Shands.get(12));
+						for (int i = 16; i >= 0; i--) {
+							if (i == 12) {
+								cardsHands[12].setBounds(
+										(int) (simulation_size_x / 2 + (simulation_size_x / 9.6) / 2)
+												+ 12 * -(simulation_size_x / 64),
+										(int) (simulation_size_y - (simulation_size_y / 4.8)
+												- (simulation_size_y / 6.2)),
+										(int) (simulation_size_x / 9.6),
+										(int) (simulation_size_y / 3.6));
+							} else {
+								cardsHands[i].setBounds(
+										(int) (simulation_size_x / 2 + (simulation_size_x / 9.6) / 2)
+												+ i * -(simulation_size_x / 64),
+										(int) (simulation_size_y - (simulation_size_y / 4.8) - 60
+												+ (simulation_size_x / -32)),
+										(int) (simulation_size_x / 9.6),
+										(int) (simulation_size_y / 3.6));
+							}
 						}
 					}
 				}
@@ -666,26 +704,29 @@ public class PlayGameView extends JFrame implements Observer {
 
 			cardsHands[13].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					lock1 = true;
+					if (lock3) {
+						lock1 = true;
 
-					cardsCenter.setIcon(convert_Card[Shands.get(13)]);
-					str = String.valueOf(Shands.get(13));
-					for (int i = 16; i >= 0; i--) {
-						if (i == 13) {
-							cardsHands[13].setBounds(
-									(int) (simulation_size_x / 2 + (simulation_size_x / 9.6) / 2)
-											+ 13 * -(simulation_size_x / 64),
-									(int) (simulation_size_y - (simulation_size_y / 4.8) - (simulation_size_y / 6.2)),
-									(int) (simulation_size_x / 9.6),
-									(int) (simulation_size_y / 3.6));
-						} else {
-							cardsHands[i].setBounds(
-									(int) (simulation_size_x / 2 + (simulation_size_x / 9.6) / 2)
-											+ i * -(simulation_size_x / 64),
-									(int) (simulation_size_y - (simulation_size_y / 4.8) - 60
-											+ (simulation_size_x / -32)),
-									(int) (simulation_size_x / 9.6),
-									(int) (simulation_size_y / 3.6));
+						cardsCenter.setIcon(convert_Card[Shands.get(13)]);
+						str = String.valueOf(Shands.get(13));
+						for (int i = 16; i >= 0; i--) {
+							if (i == 13) {
+								cardsHands[13].setBounds(
+										(int) (simulation_size_x / 2 + (simulation_size_x / 9.6) / 2)
+												+ 13 * -(simulation_size_x / 64),
+										(int) (simulation_size_y - (simulation_size_y / 4.8)
+												- (simulation_size_y / 6.2)),
+										(int) (simulation_size_x / 9.6),
+										(int) (simulation_size_y / 3.6));
+							} else {
+								cardsHands[i].setBounds(
+										(int) (simulation_size_x / 2 + (simulation_size_x / 9.6) / 2)
+												+ i * -(simulation_size_x / 64),
+										(int) (simulation_size_y - (simulation_size_y / 4.8) - 60
+												+ (simulation_size_x / -32)),
+										(int) (simulation_size_x / 9.6),
+										(int) (simulation_size_y / 3.6));
+							}
 						}
 					}
 				}
@@ -693,26 +734,29 @@ public class PlayGameView extends JFrame implements Observer {
 
 			cardsHands[14].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					lock1 = true;
+					if (lock3) {
+						lock1 = true;
 
-					cardsCenter.setIcon(convert_Card[Shands.get(14)]);
-					str = String.valueOf(Shands.get(14));
-					for (int i = 16; i >= 0; i--) {
-						if (i == 14) {
-							cardsHands[14].setBounds(
-									(int) (simulation_size_x / 2 + (simulation_size_x / 9.6) / 2)
-											+ 14 * -(simulation_size_x / 64),
-									(int) (simulation_size_y - (simulation_size_y / 4.8) - (simulation_size_y / 6.2)),
-									(int) (simulation_size_x / 9.6),
-									(int) (simulation_size_y / 3.6));
-						} else {
-							cardsHands[i].setBounds(
-									(int) (simulation_size_x / 2 + (simulation_size_x / 9.6) / 2)
-											+ i * -(simulation_size_x / 64),
-									(int) (simulation_size_y - (simulation_size_y / 4.8) - 60
-											+ (simulation_size_x / -32)),
-									(int) (simulation_size_x / 9.6),
-									(int) (simulation_size_y / 3.6));
+						cardsCenter.setIcon(convert_Card[Shands.get(14)]);
+						str = String.valueOf(Shands.get(14));
+						for (int i = 16; i >= 0; i--) {
+							if (i == 14) {
+								cardsHands[14].setBounds(
+										(int) (simulation_size_x / 2 + (simulation_size_x / 9.6) / 2)
+												+ 14 * -(simulation_size_x / 64),
+										(int) (simulation_size_y - (simulation_size_y / 4.8)
+												- (simulation_size_y / 6.2)),
+										(int) (simulation_size_x / 9.6),
+										(int) (simulation_size_y / 3.6));
+							} else {
+								cardsHands[i].setBounds(
+										(int) (simulation_size_x / 2 + (simulation_size_x / 9.6) / 2)
+												+ i * -(simulation_size_x / 64),
+										(int) (simulation_size_y - (simulation_size_y / 4.8) - 60
+												+ (simulation_size_x / -32)),
+										(int) (simulation_size_x / 9.6),
+										(int) (simulation_size_y / 3.6));
+							}
 						}
 					}
 				}
@@ -720,26 +764,29 @@ public class PlayGameView extends JFrame implements Observer {
 
 			cardsHands[15].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					lock1 = true;
+					if (lock3) {
+						lock1 = true;
 
-					cardsCenter.setIcon(convert_Card[Shands.get(15)]);
-					str = String.valueOf(Shands.get(15));
-					for (int i = 16; i >= 0; i--) {
-						if (i == 15) {
-							cardsHands[15].setBounds(
-									(int) (simulation_size_x / 2 + (simulation_size_x / 9.6) / 2)
-											+ 15 * -(simulation_size_x / 64),
-									(int) (simulation_size_y - (simulation_size_y / 4.8) - (simulation_size_y / 6.2)),
-									(int) (simulation_size_x / 9.6),
-									(int) (simulation_size_y / 3.6));
-						} else {
-							cardsHands[i].setBounds(
-									(int) (simulation_size_x / 2 + (simulation_size_x / 9.6) / 2)
-											+ i * -(simulation_size_x / 64),
-									(int) (simulation_size_y - (simulation_size_y / 4.8) - 60
-											+ (simulation_size_x / -32)),
-									(int) (simulation_size_x / 9.6),
-									(int) (simulation_size_y / 3.6));
+						cardsCenter.setIcon(convert_Card[Shands.get(15)]);
+						str = String.valueOf(Shands.get(15));
+						for (int i = 16; i >= 0; i--) {
+							if (i == 15) {
+								cardsHands[15].setBounds(
+										(int) (simulation_size_x / 2 + (simulation_size_x / 9.6) / 2)
+												+ 15 * -(simulation_size_x / 64),
+										(int) (simulation_size_y - (simulation_size_y / 4.8)
+												- (simulation_size_y / 6.2)),
+										(int) (simulation_size_x / 9.6),
+										(int) (simulation_size_y / 3.6));
+							} else {
+								cardsHands[i].setBounds(
+										(int) (simulation_size_x / 2 + (simulation_size_x / 9.6) / 2)
+												+ i * -(simulation_size_x / 64),
+										(int) (simulation_size_y - (simulation_size_y / 4.8) - 60
+												+ (simulation_size_x / -32)),
+										(int) (simulation_size_x / 9.6),
+										(int) (simulation_size_y / 3.6));
+							}
 						}
 					}
 				}
@@ -747,25 +794,28 @@ public class PlayGameView extends JFrame implements Observer {
 
 			cardsHands[16].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					lock1 = true;
-					cardsCenter.setIcon(convert_Card[Shands.get(16)]);
-					str = String.valueOf(Shands.get(16));
-					for (int i = 16; i >= 0; i--) {
-						if (i == 16) {
-							cardsHands[16].setBounds(
-									(int) (simulation_size_x / 2 + (simulation_size_x / 9.6) / 2)
-											+ 16 * -(simulation_size_x / 64),
-									(int) (simulation_size_y - (simulation_size_y / 4.8) - (simulation_size_y / 6.2)),
-									(int) (simulation_size_x / 9.6),
-									(int) (simulation_size_y / 3.6));
-						} else {
-							cardsHands[i].setBounds(
-									(int) (simulation_size_x / 2 + (simulation_size_x / 9.6) / 2)
-											+ i * -(simulation_size_x / 64),
-									(int) (simulation_size_y - (simulation_size_y / 4.8) - 60
-											+ (simulation_size_x / -32)),
-									(int) (simulation_size_x / 9.6),
-									(int) (simulation_size_y / 3.6));
+					if (lock3) {
+						lock1 = true;
+						cardsCenter.setIcon(convert_Card[Shands.get(16)]);
+						str = String.valueOf(Shands.get(16));
+						for (int i = 16; i >= 0; i--) {
+							if (i == 16) {
+								cardsHands[16].setBounds(
+										(int) (simulation_size_x / 2 + (simulation_size_x / 9.6) / 2)
+												+ 16 * -(simulation_size_x / 64),
+										(int) (simulation_size_y - (simulation_size_y / 4.8)
+												- (simulation_size_y / 6.2)),
+										(int) (simulation_size_x / 9.6),
+										(int) (simulation_size_y / 3.6));
+							} else {
+								cardsHands[i].setBounds(
+										(int) (simulation_size_x / 2 + (simulation_size_x / 9.6) / 2)
+												+ i * -(simulation_size_x / 64),
+										(int) (simulation_size_y - (simulation_size_y / 4.8) - 60
+												+ (simulation_size_x / -32)),
+										(int) (simulation_size_x / 9.6),
+										(int) (simulation_size_y / 3.6));
+							}
 						}
 					}
 				}
@@ -866,6 +916,7 @@ public class PlayGameView extends JFrame implements Observer {
 			setTitle("最中限" + "(" + simulation_size_x + "×" + simulation_size_y + ")" + " -シミュレーション- (結果)");
 			for (int i = 16; i >= 0; i--) {
 				cardsHands[i].setIcon(null);
+				cardsHands[i].setEnabled(false);
 			}
 			Enter.setIcon(null);
 			labelTop.setText("最終結果");
@@ -942,6 +993,7 @@ public class PlayGameView extends JFrame implements Observer {
 			setTitle("最中限" + "(" + simulation_size_x + "×" + simulation_size_y + ")" + " -シミュレーション- (エラー)");
 			for (int i = 16; i >= 0; i--) {
 				cardsHands[i].setIcon(null);
+				cardsHands[i].setEnabled(false);
 			}
 			Enter.setIcon(null);
 			labelTop.setText("値が不正です");
@@ -991,6 +1043,7 @@ public class PlayGameView extends JFrame implements Observer {
 			labelTop.setText("不明なエラー");
 			for (int i = 16; i >= 0; i--) {
 				cardsHands[i].setIcon(null);
+				cardsHands[i].setEnabled(false);
 			}
 			Enter.setIcon(null);
 			labelTop.setFont(new Font("MS　ゴシック", Font.BOLD, (int) (simulation_size_x / 19.2)));
@@ -1044,6 +1097,7 @@ public class PlayGameView extends JFrame implements Observer {
 			Thread.yield();
 			if (lock2) {
 				lock1 = false;
+				lock3 = false;
 				return str;
 			}
 

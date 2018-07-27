@@ -150,6 +150,7 @@ public class PlayGameModel extends Observable {
 							}
 							try {
 								Thread.sleep(2000);
+								PlayGameView.lock3 = true;
 							} catch (InterruptedException e) {
 							}
 						}
@@ -167,6 +168,7 @@ public class PlayGameModel extends Observable {
 				info.setGameStatus(2); // ステータス2:ゲーム終了
 				PlayGameView.lock2 = false;
 				PlayGameView.str = null;
+				PlayGameView.lock3 = true;
 				// 最終的な勝敗判定をする。
 				judge.finalJudgement(score);
 				score.setFinalScore(judge.getFinalWinner());
