@@ -2,7 +2,7 @@ package framework;
 
 /**
  * ゲームの状態とターン・ラウンド数を保持するクラスです。
- * @author 柴田航平
+ * @author 柴田航平 & 鈴木大河
  */
 public class InfoGame {
 	/**
@@ -17,6 +17,10 @@ public class InfoGame {
 	 * ラウンド数を表すフィールです。
 	 */
 	private int roundNum;
+	/**
+	 * エラーを起こしたプレイヤを格納するフィールドです。
+	 */
+	private String[] errorPlayerName = new String[3];
 
 	/**
 	 * ゲームのステータスを設定するメソッドです。
@@ -42,6 +46,12 @@ public class InfoGame {
 		roundNum = num;
 	}
 
+	void setErrorPlayerName(String name) {
+		if(errorPlayerName[0]!=null) {
+			if(errorPlayerName[1]!=null)errorPlayerName[2]=name;
+			else errorPlayerName[1]=name;
+		}else errorPlayerName[0]=name;
+	}
 	/**
 	 * ゲームのステータスを取得するメソッドです。
 	 * @return ゲームステータス
@@ -64,5 +74,9 @@ public class InfoGame {
 	public int getRoundNum() {
 		return roundNum;
 	}
+	public String getErrorPlayerName (int i) {
+		return errorPlayerName[i];
+	}
+	
 
 }

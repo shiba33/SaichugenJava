@@ -17,7 +17,7 @@ import javax.swing.JPanel;
 
 /**
  * シミュレーションのView(描画)に関わるクラスです。
- * @author 柴田航平 & 古田亮汰郎
+ * @author 柴田航平 & 古田亮汰郎 & 鈴木大河
  */
 public class SimulationView extends JFrame implements Observer {
 	private JPanel p = new JPanel();
@@ -26,6 +26,7 @@ public class SimulationView extends JFrame implements Observer {
 	private JLabel ScoreB = new JLabel();
 	private JLabel ScoreY = new JLabel();
 	private JLabel labelTop = new JLabel();
+	private JLabel labelError = new JLabel();
 	private JLabel labelWin = new JLabel();
 	private JLabel cardsLeft = new JLabel();
 	private JLabel cardsCenter = new JLabel();
@@ -381,6 +382,17 @@ public class SimulationView extends JFrame implements Observer {
 			labelTop.setForeground(Color.BLACK);
 			labelTop.setHorizontalAlignment(JLabel.CENTER);
 			labelTop.setOpaque(false);
+			
+			String str = "<html>";
+			for(int i = 0;i<3;i++) {
+				if(info.getErrorPlayerName(i)!=null) str = str + info.getErrorPlayerName(i) +"<br>";
+			}
+			labelError.setText("<html>不正リスト<br>"+ str);
+			labelError.setFont(new Font("MS　ゴシック", Font.BOLD, (int) (simulation_size_x / 19.2)));
+			labelError.setForeground(Color.BLACK);
+			labelError.setHorizontalAlignment(JLabel.CENTER);
+			labelError.setOpaque(false);
+						
 
 			ImageIcon backImg = new ImageIcon("./image/SimBack.jpg");
 			ImageIcon resizing_back = ResizingImage.resizeIcon(backImg, simulation_size_x, simulation_size_y);
@@ -391,6 +403,11 @@ public class SimulationView extends JFrame implements Observer {
 					33 + (simulation_size_y / -48),
 					(int) (simulation_size_x / 2.93),
 					(int) (simulation_size_y / 8.06));
+			
+			labelError.setBounds((int) (simulation_size_x / 2 - (simulation_size_x / 2.93 / 2)),
+					33 + (simulation_size_y / -28),
+					(int) (simulation_size_x /2.93),
+					(int) (simulation_size_y));
 
 			button1.setContentAreaFilled(false);
 			button1.setBorderPainted(false);
@@ -409,6 +426,7 @@ public class SimulationView extends JFrame implements Observer {
 			labelWin.setIcon(null);
 
 			p.add(labelTop);
+			p.add(labelError);
 			p.add(cardsCenter);
 			p.add(button1);
 			p.add(background);
