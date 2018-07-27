@@ -104,6 +104,10 @@ public class SimulationModel extends Observable {
 						if (!tableCards.getDeepHands(0).contains(p1Hand) ||
 								!tableCards.getDeepHands(1).contains(p2Hand) ||
 								!tableCards.getDeepHands(2).contains(p3Hand)) {
+							
+							if(!tableCards.getDeepHands(0).contains(p1Hand)) info.setErrorPlayerName(cutPlayerName(player1.getName()));
+							if(!tableCards.getDeepHands(1).contains(p2Hand)) info.setErrorPlayerName(cutPlayerName(player2.getName()));
+							if(!tableCards.getDeepHands(2).contains(p3Hand)) info.setErrorPlayerName(cutPlayerName(player3.getName()));
 							info.setGameStatus(5); // ステータス5:不正な値検知時のエラー
 							publish();
 							return null;
@@ -221,3 +225,4 @@ public class SimulationModel extends Observable {
 		return info;
 	}
 }
+
