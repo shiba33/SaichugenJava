@@ -28,7 +28,7 @@ public class PlayGameController implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("GoBack")) {
 			pm.clickedButton1();
-			mm.setButton2();
+			mm.setButton1();
 		}
 	}
 
